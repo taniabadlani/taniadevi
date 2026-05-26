@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Finance Banking App — Case Study</title>
+<meta name="description" content="A 3-week UI case study for a modern mobile finance &amp; banking app." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#0E2625;
+    --ink:#EFEAE0;
+    --mute:rgba(239,234,224,.58);
+    --line:rgba(239,234,224,.14);
+    --line-soft:rgba(239,234,224,.07);
+    --surface:rgba(255,255,255,.05);
+    /* Finance app brand-inspired accent (electric blue) */
+    --accent:#4756FF;
+    --accent-2:#E9D6FF;
+    --accent-ink:#FFFFFF;
+    --display:'Bricolage Grotesque','Inter',ui-sans-serif,sans-serif;
+    --body:'Inter',ui-sans-serif,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  }
+  html[data-theme="light"]{
+    --bg:#EFEAE0;
+    --ink:#1A1418;
+    --mute:rgba(26,20,24,.58);
+    --line:rgba(26,20,24,.12);
+    --line-soft:rgba(26,20,24,.06);
+    --surface:rgba(255,255,255,.6);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:var(--body);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+    transition:background .35s ease,color .35s ease}
+  html{scroll-behavior:smooth}
+  ::selection{background:var(--ink);color:var(--bg)}
+  a{color:inherit}
+
+  /* layout */
+  .col{max-width:760px;margin:0 auto;padding:0 28px}
+  .col.wide{max-width:1120px}
+  section.break{
+    position:relative;left:50%;transform:translateX(-50%);
+    width:min(1240px,calc(100vw - 56px))}
+
+  /* top bar */
+  .bar{position:sticky;top:0;z-index:20;
+    backdrop-filter:blur(18px) saturate(140%);
+    -webkit-backdrop-filter:blur(18px) saturate(140%);
+    background:color-mix(in oklab,var(--bg) 80%,transparent);
+    border-bottom:.5px solid transparent;transition:border-color .3s}
+  .bar.scrolled{border-bottom-color:var(--line)}
+  .bar-inner{display:flex;justify-content:space-between;align-items:center;
+    height:58px;max-width:1240px;margin:0 auto;padding:0 28px;gap:16px}
+  .back{text-decoration:none;color:var(--ink);font-family:var(--display);
+    font-weight:500;font-size:15px;letter-spacing:-.01em;
+    display:inline-flex;align-items:center;gap:8px}
+  .back .a{color:var(--mute);transition:transform .3s,color .3s;display:inline-block}
+  .back:hover .a{transform:translateX(-4px);color:var(--ink)}
+  .bar-mid{flex:1;text-align:center;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+  .theme{appearance:none;border:0;background:transparent;color:var(--mute);
+    font-family:var(--body);font-size:15px;cursor:pointer;padding:0;line-height:1;
+    display:inline-flex;align-items:center;gap:6px}
+  .theme:hover{color:var(--ink)}
+  .theme svg{width:14px;height:14px}
+
+  /* cover — uses brand accent */
+  .cover{margin:20px auto 0;padding:28px 32px 28px;
+    background:var(--accent);color:var(--accent-ink);
+    border-radius:14px;position:relative;overflow:hidden;
+    box-shadow:0 1px 0 rgba(255,255,255,.16) inset,0 18px 40px -22px rgba(0,0,0,.5);
+    max-width:880px}
+  .cover::before{content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(40% 60% at 90% 10%, rgba(233,214,255,.22), transparent 60%),
+      radial-gradient(30% 50% at 10% 95%, rgba(123,255,255,.18), transparent 70%);
+    pointer-events:none}
+  .cover .eye{font-family:var(--body);font-weight:500;font-size:11px;
+    letter-spacing:.06em;text-transform:uppercase;opacity:.78;position:relative}
+  .cover h1{font-family:var(--display);font-weight:500;
+    font-size:clamp(28px,3.6vw,44px);letter-spacing:-.022em;line-height:1.05;
+    margin:8px 0 12px;max-width:14ch;position:relative}
+  .cover .lede{font-size:14.5px;line-height:1.55;
+    max-width:54ch;opacity:.95;margin:0;position:relative;color:#fff}
+  .cover .lede span{color:#fff !important}
+  .cover .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+    margin-top:22px;padding-top:16px;
+    border-top:1px solid rgba(255,255,255,.24);position:relative}
+  .cover .meta .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;
+    text-transform:uppercase;opacity:.6;margin-bottom:5px;display:block}
+  .cover .meta .v{font-family:var(--display);font-weight:400;font-size:14px;
+    letter-spacing:-.01em;line-height:1.3}
+  @media (max-width:720px){
+    .cover{padding:24px 22px;border-radius:12px}
+    .cover .meta{grid-template-columns:repeat(2,1fr);gap:14px}
+  }
+
+  /* section heads */
+  section{padding:80px 0 0}
+  .eyebrow{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--mute)}
+  .eyebrow .num{font-variant-numeric:tabular-nums;color:var(--ink);opacity:.8}
+  .eyebrow .line{flex:1;height:1px;background:var(--line)}
+  h2{font-family:var(--display);font-weight:500;
+    font-size:clamp(28px,3.6vw,42px);letter-spacing:-.02em;line-height:1.1;
+    margin:0 0 24px;color:var(--ink);max-width:22ch;text-wrap:pretty}
+  h3{font-family:var(--display);font-weight:500;font-size:22px;
+    letter-spacing:-.01em;line-height:1.25;margin:0 0 8px}
+
+  /* body type */
+  p{margin:0 0 18px;max-width:62ch;line-height:1.7;color:var(--ink)}
+  p.lede{font-size:19px;line-height:1.55;color:var(--ink);max-width:46ch}
+  p.mute{color:var(--mute)}
+
+  /* image cards */
+  .shot{position:relative;width:100%;border-radius:14px;overflow:hidden;
+    background:var(--surface);border:.5px solid var(--line);
+    box-shadow:0 14px 40px -22px rgba(0,0,0,.5);
+    display:block}
+  .shot img{display:block;width:100%;height:auto}
+  /* a "tall" variant for design-system & multi-screen sheets — show more */
+  .shot.tall img{max-height:none}
+  .shot.full img{max-height:none}
+
+  /* image caption */
+  .cap{margin:14px 0 0;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.02em;color:var(--mute);max-width:62ch;line-height:1.55}
+  .cap b{color:var(--ink);font-weight:500;text-transform:uppercase;
+    letter-spacing:.06em;font-size:10.5px;margin-right:8px}
+
+  /* row of images */
+  .row{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .row.three{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:720px){.row,.row.three{grid-template-columns:1fr}}
+
+  /* process steps — three columns */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+    margin:24px 0 0}
+  .step{padding:24px;background:var(--surface);
+    border:.5px solid var(--line);border-radius:14px}
+  .step .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--mute);margin:0 0 14px}
+  .step h3{margin:0 0 8px;font-size:20px}
+  .step p{margin:0;color:var(--mute);font-size:14.5px;line-height:1.6}
+  @media (max-width:720px){.steps{grid-template-columns:1fr}}
+
+  /* design tokens preview */
+  .tokens{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+    margin:24px 0 0}
+  .tok{aspect-ratio:1;border-radius:12px;display:flex;align-items:flex-end;
+    padding:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;
+    text-transform:uppercase;color:#fff;
+    box-shadow:0 14px 30px -16px rgba(0,0,0,.5)}
+  .tok.l{color:#1A1418}
+  @media (max-width:560px){.tokens{grid-template-columns:repeat(2,1fr)}}
+
+  /* pull-quote */
+  .pull{margin:60px 0;padding:32px 0;border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line)}
+  .pull q{font-family:var(--display);font-weight:400;
+    font-size:clamp(22px,2.6vw,30px);letter-spacing:-.015em;line-height:1.3;
+    color:var(--ink);quotes:"\201C""\201D";display:block;max-width:30ch}
+  .pull .src{margin-top:14px;font-family:var(--mono);font-size:11px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+
+  /* result outcome card */
+  .result{margin:32px 0 0;padding:36px 36px;background:var(--accent);
+    color:var(--accent-ink);border-radius:18px;
+    box-shadow:0 18px 40px -22px rgba(71,86,255,.5)}
+  .result .eye{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:rgba(255,255,255,.65);
+    margin-bottom:10px;display:block}
+  .result h3{font-family:var(--display);font-weight:500;
+    font-size:clamp(24px,3vw,34px);letter-spacing:-.018em;line-height:1.15;
+    color:inherit;margin:0;max-width:24ch}
+
+  /* next project card */
+  .next{margin:80px auto 0;padding:48px 48px;
+    background:var(--accent);color:var(--accent-ink);border-radius:22px;
+    display:flex;justify-content:space-between;align-items:end;
+    text-decoration:none;gap:24px;flex-wrap:wrap;
+    transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+  .next:hover{transform:translateY(-4px)}
+  .next .eye{font-family:var(--body);font-weight:500;font-size:12px;
+    letter-spacing:.05em;text-transform:uppercase;opacity:.78}
+  .next h2{margin:6px 0 0;color:inherit;font-size:clamp(32px,4.5vw,52px);
+    letter-spacing:-.022em}
+  .next .arr{font-size:24px;opacity:.85}
+  @media (max-width:640px){.next{padding:32px 28px}}
+
+  footer{padding:48px 0 56px;color:var(--mute);font-family:var(--mono);
+    font-size:11px;letter-spacing:.04em;text-transform:uppercase;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer a{text-decoration:none}
+  footer a:hover{color:var(--ink)}
+
+  /* reveal */
+  .r{opacity:0;transform:translateY(14px);
+    transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .r.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .r{transition:none !important;opacity:1 !important;transform:none !important}
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ── Top bar ─────────────────────────────────────────────────────────── -->
+<div class="bar" id="bar">
+  <div class="bar-inner">
+    <a href="../Portfolio Simple.html" class="back">
+      <span class="a">←</span> Back to work
+    </a>
+    <div class="bar-mid">Finance Banking App · Case Study</div>
+    <button class="theme" id="themeBtn" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 16 16" fill="none" aria-hidden="true"></svg>
+      <span id="themeLabel">dark</span>
+    </button>
+  </div>
+</div>
+
+<!-- ── Cover ───────────────────────────────────────────────────────────── -->
+<div class="col wide">
+  <section class="break" style="padding-top:0">
+    <div class="cover" style="background-color: rgb(71, 86, 255)">
+      <span class="eye">Mobile &nbsp;/&nbsp; UI Case Study</span>
+      <h1>Finance Banking App</h1>
+      <p class="lede"><span style="color: rgb(255, 249, 249)">A modern mobile banking app — designed end-to-end in three weeks. Account tracking, payments, transfers, and a small system to hold it all together.</span></p>
+      <div class="meta">
+        <div>
+          <span class="k">Role</span>
+          <span class="v">UI Designer · Solo</span>
+        </div>
+        <div>
+          <span class="k">Project Type</span>
+          <span class="v">Mobile · iOS</span>
+        </div>
+        <div>
+          <span class="k">Duration</span>
+          <span class="v">3 weeks</span>
+        </div>
+        <div>
+          <span class="k" style="color: rgb(255, 255, 255)">Tools</span>
+          <span class="v">Figma</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ── Hero image (the isometric layout) ───────────────────────────────── -->
+<div class="col wide">
+  <section class="break" style="padding-top:32px">
+    <div class="shot tall">
+      <img src="finance-app/cover.png" alt="Finance Banking App — angled grid of all key screens" />
+    </div>
+    <p class="cap"><b>Hero</b>A quick visual index of the app — auth, transactions, cards, expense tracking, profile.</p>
+  </section>
+</div>
+
+<!-- ── Overview ────────────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="overview">
+    <div class="eyebrow"><span class="num">00</span><span>— Overview</span><span class="line"></span></div>
+    <h2>A mobile finance app, end-to-end, in three weeks.</h2>
+    <p class="lede">This is a self-initiated UI case study exploring what a modern mobile banking app looks like when it leans hard on clarity — clear hierarchy, generous space, and one job per screen.</p>
+    <p>The project covers the full first-time experience: onboarding, OTP verification, sign in / sign up, the home dashboard, expense tracking, transactions, cards, payments, notifications, and the profile. Plus a small design system to keep the surface consistent.</p>
+  </section>
+</div>
+
+<!-- ── Problem ────────────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="problem">
+    <div class="eyebrow"><span class="num">01</span><span>— The Problem</span><span class="line"></span></div>
+    <h2>Most banking apps bury the one thing you opened them for.</h2>
+    <p>Mobile banking has a habit of competing with itself — tabs full of cross-sells, dashboards that lead with everything at once, and dense lists that mistake density for usefulness. The goal here was the opposite: make the most common actions — check balance, send money, see what I spent — the most obvious ones.</p>
+  </section>
+</div>
+
+<!-- ── Process ─────────────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="process">
+    <div class="eyebrow"><span class="num">02</span><span>— Process</span><span class="line"></span></div>
+    <h2>Three weeks, three stages.</h2>
+    <p>I split the time roughly in thirds — one week thinking about flows, one week pushing the visual language, one week tightening everything into a system.</p>
+
+    <div class="steps">
+      <div class="step">
+        <p class="k">01 — Flows</p>
+        <h3>Map the daily loops.</h3>
+        <p>Listed every action a customer does in a week — pay, check, transfer, top-up. The home screen had to answer those in one glance, not three taps.</p>
+      </div>
+      <div class="step">
+        <p class="k">02 — Visual Direction</p>
+        <h3>Soft gradients, hard hierarchy.</h3>
+        <p>An electric-blue brand, off-white cards, gentle gradient accents on the key CTAs. Restraint elsewhere — most surfaces are quiet so the actions can be loud.</p>
+      </div>
+      <div class="step">
+        <p class="k">03 — System</p>
+        <h3>Make it repeatable.</h3>
+        <p>Pulled out a small token set — colors, type scale, button states, shadow, icons — so the next screen takes minutes, not hours.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ── Pull quote ──────────────────────────────────────────────────────── -->
+<div class="col">
+  <div class="pull">
+    <q>Make the most common actions the most obvious ones. Everything else is decoration.</q>
+    <div class="src">— Working principle, week one</div>
+  </div>
+</div>
+
+<!-- ── User interface section ──────────────────────────────────────────── -->
+<div class="col">
+  <section id="ui">
+    <div class="eyebrow"><span class="num">03</span><span>— User Interface</span><span class="line"></span></div>
+    <h2>The finished product — colors, gradients, interactive elements.</h2>
+    <p>The user interface is the high-fidelity version of the app — colors applied, gradient CTAs in place, and a clear hierarchy across every flow.</p>
+  </section>
+</div>
+
+<div class="col wide">
+  <section class="break" style="padding-top:24px">
+    <div class="shot tall">
+      <img src="finance-app/home-screen.png" alt="User interface — home screen with balance card, chart and primary CTA" />
+    </div>
+    <p class="cap"><b>Home screen</b>Balance, spend over time, and the next action — "Check your bank accounts" — all above the fold.</p>
+  </section>
+</div>
+
+<!-- ── Key screens grid ────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="screens" style="padding-top:96px">
+    <div class="eyebrow"><span class="num">04</span><span>— Key Screens</span><span class="line"></span></div>
+    <h2>Six screens that carry the whole experience.</h2>
+    <p>OTP verification, expense tracking, the cards view, secure-rewards, the dashboard greeting, notifications, and the profile — each laid out with the same visual rules so the app stays familiar as you move through it.</p>
+  </section>
+</div>
+
+<div class="col wide">
+  <section class="break" style="padding-top:24px">
+    <div class="shot tall full">
+      <img src="finance-app/screens-overview.png" alt="OTP verification, expense tracking, secure-rewards, dashboard, notifications, and profile screens" />
+    </div>
+    <p class="cap"><b>Six core screens</b>Repetition is the system — same card shape, same blue accent, same gradient CTA. The screens stay distinct because the <em>content</em> changes, not the chrome.</p>
+  </section>
+</div>
+
+<!-- ── Auth & onboarding ──────────────────────────────────────────────── -->
+<div class="col">
+  <section id="auth" style="padding-top:96px">
+    <div class="eyebrow"><span class="num">05</span><span>— Auth &amp; Onboarding</span><span class="line"></span></div>
+    <h2>Welcome back, sign up, sign in — variations on one composition.</h2>
+    <p>The first screens a user ever sees set the tone for the rest of the product. I kept the gradient hero shape, anchored by the brand mark, and let the form below it stay restrained — large hit targets, a single primary action, no decorative noise.</p>
+  </section>
+</div>
+
+<div class="col wide">
+  <section class="break" style="padding-top:24px">
+    <div class="shot tall full">
+      <img src="finance-app/auth-screens.png" alt="Welcome back, sign up, and sign in screens shown side-by-side" />
+    </div>
+    <p class="cap"><b>Auth flow</b>One layout, three states. Bottom-right always has the primary CTA so muscle memory wins.</p>
+  </section>
+</div>
+
+<!-- ── Payment & transactions ─────────────────────────────────────────── -->
+<div class="col">
+  <section id="payment" style="padding-top:96px">
+    <div class="eyebrow"><span class="num">06</span><span>— Payments &amp; Transactions</span><span class="line"></span></div>
+    <h2>Two screens that do the work — and nothing else.</h2>
+    <p>The payment screen simplifies the process of sending money: enter an amount, pick a recipient, send. The transaction screen reverses it — total expenses up top, a searchable feed below. Both lean on the same vocabulary so the back-and-forth feels seamless.</p>
+  </section>
+</div>
+
+<div class="col wide">
+  <section class="break" style="padding-top:24px">
+    <div class="shot tall full">
+      <img src="finance-app/payment-transaction.png" alt="Payment screen with numeric keypad, and transaction screen with expense list" />
+    </div>
+    <p class="cap"><b>Payment &amp; transaction</b>Big numbers, generous tap targets, one decision per screen.</p>
+  </section>
+</div>
+
+<!-- ── Design system ──────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="system" style="padding-top:96px">
+    <div class="eyebrow"><span class="num">07</span><span>— Design System</span><span class="line"></span></div>
+    <h2>A small system to keep three weeks of work consistent.</h2>
+    <p>A design system, formally, is a collection of reusable components guided by clear standards that can be assembled to build any number of digital products. In practice for this project that meant: a tight color set, a four-step type scale (Montserrat, H1–H4), two button styles, three shadow elevations, and an icon set.</p>
+
+    <div class="tokens">
+      <div class="tok" style="background:#4756FF">Primary · #4756FF</div>
+      <div class="tok" style="background:linear-gradient(135deg,#4756FF,#A77BFF,#5BD2DA)">Gradient · CTA</div>
+      <div class="tok l" style="background:#F5F6FA">Surface · #F5F6FA</div>
+      <div class="tok" style="background:#1A1A2E">Ink · #1A1A2E</div>
+    </div>
+  </section>
+</div>
+
+<div class="col wide">
+  <section class="break" style="padding-top:24px">
+    <div class="shot tall full">
+      <img src="finance-app/design-system.png" alt="Design system — color, button, typography, icon, and shadow styles" />
+    </div>
+    <p class="cap"><b>Design system</b>Color · type (Montserrat H1–H4) · two button styles · three shadow elevations · basic icon set.</p>
+  </section>
+</div>
+
+<!-- ── Result ──────────────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="result">
+    <div class="eyebrow"><span class="num">08</span><span>— Result</span><span class="line"></span></div>
+    <h2>A complete, opinionated finance app in 21 days.</h2>
+    <p>From an empty Figma file to a full design system and 15+ key screens — onboarding, dashboard, payments, transactions, profile — designed and ready to hand to engineering.</p>
+
+    <div class="result">
+      <span class="eye">Outcome</span>
+      <h3>End-to-end mobile banking experience, designed inside a three-week sprint.</h3>
+    </div>
+  </section>
+</div>
+
+<!-- ── Reflection ──────────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="reflection">
+    <div class="eyebrow"><span class="num">09</span><span>— What I Learned</span><span class="line"></span></div>
+    <h2>Build the system as you go — not at the end.</h2>
+    <p>The biggest lesson from this sprint: pulling tokens and components out <em>while</em> designing screens (rather than after) cut the rework in half. By the third week, new screens were composition exercises, not from-scratch design.</p>
+    <p class="mute">If you're hiring and want to dig into any of this — what worked, what I'd change next time — <a href="../Portfolio Simple.html#contact" style="color:inherit">drop me a note</a>. I'm always up for a critique.</p>
+  </section>
+</div>
+
+<!-- ── Next ────────────────────────────────────────────────────────────── -->
+<div class="col wide">
+  <section class="break">
+    <a class="next" href="Cluster Club.html" style="--accent:#7B3F1A">
+      <div>
+        <div class="eye">Next project</div>
+        <h2>Cluster Club →</h2>
+      </div>
+      <span class="arr">↗</span>
+    </a>
+  </section>
+</div>
+
+<div class="col">
+  <footer>
+    <div>© 2026 your name</div>
+    <div><a href="../Portfolio Simple.html">↑ Back to portfolio</a></div>
+    <div>Last updated 05.20.26</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  // ── theme toggle, persisted (shares key with portfolio)
+  var html = document.documentElement;
+  var btn = document.getElementById('themeBtn');
+  var label = document.getElementById('themeLabel');
+  var icon = document.getElementById('themeIcon');
+  var KEY = 'portfolio-simple-theme';
+  var MOON = '<path d="M13.2 9.4A5.6 5.6 0 0 1 6.6 2.8a5.6 5.6 0 1 0 6.6 6.6Z" fill="currentColor"/>';
+  var SUN  = '<circle cx="8" cy="8" r="3.1" fill="currentColor"/>'
+           + '<g stroke="currentColor" stroke-width="1.2" stroke-linecap="round">'
+           + '<path d="M8 1.6V3"/><path d="M8 13v1.4"/>'
+           + '<path d="M1.6 8H3"/><path d="M13 8h1.4"/>'
+           + '<path d="M3.4 3.4l1 1"/><path d="M11.6 11.6l1 1"/>'
+           + '<path d="M12.6 3.4l-1 1"/><path d="M4.4 11.6l-1 1"/></g>';
+  function setTheme(t){
+    html.dataset.theme = t;
+    if (t === 'dark') { label.textContent = 'light'; icon.innerHTML = SUN; }
+    else              { label.textContent = 'dark';  icon.innerHTML = MOON; }
+    try { localStorage.setItem(KEY, t); } catch(e){}
+  }
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) setTheme(saved); else setTheme('dark');
+  } catch(e) { setTheme('dark'); }
+  btn.addEventListener('click', function(){
+    setTheme(html.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
+
+  // ── top bar border on scroll
+  var bar = document.getElementById('bar');
+  window.addEventListener('scroll', function(){
+    if (window.scrollY > 12) bar.classList.add('scrolled');
+    else bar.classList.remove('scrolled');
+  }, { passive: true });
+
+  // ── reveal on scroll
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var sel = ['section h2', 'section p', '.shot', '.steps .step',
+               '.pull', '.tokens .tok', '.result', '.next', 'footer > div'];
+    sel.forEach(function(s){
+      document.querySelectorAll(s).forEach(function(el){ el.classList.add('r'); });
+    });
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+    document.querySelectorAll('.r').forEach(function(el){ io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
+
+<style id="__om-edit-overrides">
+.cover >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) { color: rgb(106, 103, 103) !important }
+.cover >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) { color: rgb(58, 58, 58) !important }
+.cover >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) { color: rgb(53, 53, 53) !important }
+.cover >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) { color: rgb(0, 0, 0) !important }
+</style>

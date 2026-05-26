@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Stomp! Stomp! Rhinos — Case Study</title>
+<meta name="description" content="A vibrant website for a children's animated show. Designed at Fuze Studio." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#0E2625;
+    --ink:#EFEAE0;
+    --mute:rgba(239,234,224,.58);
+    --line:rgba(239,234,224,.14);
+    --line-soft:rgba(239,234,224,.07);
+    --surface:rgba(255,255,255,.05);
+    /* Kids-show brand-inspired accent (warm pink) */
+    --accent:#F58BAA;
+    --accent-2:#C2EAFF;
+    --accent-ink:#FFFFFF;
+    --display:'Bricolage Grotesque','Inter',ui-sans-serif,sans-serif;
+    --body:'Inter',ui-sans-serif,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  }
+  html[data-theme="light"]{
+    --bg:#EFEAE0;
+    --ink:#1A1418;
+    --mute:rgba(26,20,24,.58);
+    --line:rgba(26,20,24,.12);
+    --line-soft:rgba(26,20,24,.06);
+    --surface:rgba(255,255,255,.6);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:var(--body);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+    transition:background .35s ease,color .35s ease}
+  html{scroll-behavior:smooth}
+  ::selection{background:var(--ink);color:var(--bg)}
+  a{color:inherit}
+
+  .col{max-width:760px;margin:0 auto;padding:0 28px}
+  .col.wide{max-width:1120px}
+  section.break{
+    position:relative;left:50%;transform:translateX(-50%);
+    width:min(1240px,calc(100vw - 56px))}
+
+  /* top bar */
+  .bar{position:sticky;top:0;z-index:20;
+    backdrop-filter:blur(18px) saturate(140%);
+    -webkit-backdrop-filter:blur(18px) saturate(140%);
+    background:color-mix(in oklab,var(--bg) 80%,transparent);
+    border-bottom:.5px solid transparent;transition:border-color .3s}
+  .bar.scrolled{border-bottom-color:var(--line)}
+  .bar-inner{display:flex;justify-content:space-between;align-items:center;
+    height:58px;max-width:1240px;margin:0 auto;padding:0 28px;gap:16px}
+  .back{text-decoration:none;color:var(--ink);font-family:var(--display);
+    font-weight:500;font-size:15px;letter-spacing:-.01em;
+    display:inline-flex;align-items:center;gap:8px}
+  .back .a{color:var(--mute);transition:transform .3s,color .3s;display:inline-block}
+  .back:hover .a{transform:translateX(-4px);color:var(--ink)}
+  .bar-mid{flex:1;text-align:center;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+  .theme{appearance:none;border:0;background:transparent;color:var(--mute);
+    font-family:var(--body);font-size:15px;cursor:pointer;padding:0;line-height:1;
+    display:inline-flex;align-items:center;gap:6px}
+  .theme:hover{color:var(--ink)}
+  .theme svg{width:14px;height:14px}
+
+  /* cover */
+  .cover{margin:20px auto 0;padding:28px 32px 28px;
+    background:var(--accent);color:var(--accent-ink);
+    border-radius:14px;position:relative;overflow:hidden;
+    box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 18px 40px -22px rgba(0,0,0,.5);
+    max-width:880px}
+  .cover::before{content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(40% 60% at 90% 10%, rgba(194,234,255,.32), transparent 60%),
+      radial-gradient(30% 50% at 10% 95%, rgba(255,255,255,.18), transparent 70%);
+    pointer-events:none}
+  .cover .eye{font-family:var(--body);font-weight:500;font-size:11px;
+    letter-spacing:.06em;text-transform:uppercase;opacity:.85;position:relative}
+  .cover h1{font-family:var(--display);font-weight:500;
+    font-size:clamp(28px,3.6vw,44px);letter-spacing:-.022em;line-height:1.05;
+    margin:8px 0 12px;max-width:14ch;position:relative}
+  .cover .lede{font-size:14.5px;line-height:1.55;
+    max-width:54ch;opacity:.95;margin:0;position:relative;color:#fff}
+  .cover .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+    margin-top:22px;padding-top:16px;
+    border-top:1px solid rgba(255,255,255,.32);position:relative}
+  .cover .meta .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;
+    text-transform:uppercase;opacity:.7;margin-bottom:5px;display:block}
+  .cover .meta .v{font-family:var(--display);font-weight:400;font-size:14px;
+    letter-spacing:-.01em;line-height:1.3}
+  @media (max-width:720px){
+    .cover{padding:24px 22px;border-radius:12px}
+    .cover .meta{grid-template-columns:repeat(2,1fr);gap:14px}
+  }
+
+  /* section heads */
+  section{padding:80px 0 0}
+  .eyebrow{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--mute)}
+  .eyebrow .num{font-variant-numeric:tabular-nums;color:var(--ink);opacity:.8}
+  .eyebrow .line{flex:1;height:1px;background:var(--line)}
+  h2{font-family:var(--display);font-weight:500;
+    font-size:clamp(28px,3.6vw,42px);letter-spacing:-.02em;line-height:1.1;
+    margin:0 0 24px;color:var(--ink);max-width:22ch;text-wrap:pretty}
+  h3{font-family:var(--display);font-weight:500;font-size:22px;
+    letter-spacing:-.01em;line-height:1.25;margin:0 0 8px}
+
+  /* body */
+  p{margin:0 0 18px;max-width:62ch;line-height:1.7;color:var(--ink)}
+  p.lede{font-size:19px;line-height:1.55;color:var(--ink);max-width:46ch}
+  p.mute{color:var(--mute)}
+
+  /* image cards */
+  .shot{position:relative;width:100%;border-radius:14px;overflow:hidden;
+    background:var(--surface);border:.5px solid var(--line);
+    box-shadow:0 14px 40px -22px rgba(0,0,0,.5);
+    display:block}
+  .shot img{display:block;width:100%;height:auto}
+  .shot.tall img{max-height:none}
+  .shot.full img{max-height:none}
+
+  /* caption */
+  .cap{margin:14px 0 0;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.02em;color:var(--mute);max-width:62ch;line-height:1.55}
+  .cap b{color:var(--ink);font-weight:500;text-transform:uppercase;
+    letter-spacing:.06em;font-size:10.5px;margin-right:8px}
+
+  /* row of images */
+  .row{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .row.three{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:720px){.row,.row.three{grid-template-columns:1fr}}
+
+  /* process steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+    margin:24px 0 0}
+  .step{padding:24px;background:var(--surface);
+    border:.5px solid var(--line);border-radius:14px}
+  .step .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--mute);margin:0 0 14px}
+  .step h3{margin:0 0 8px;font-size:20px}
+  .step p{margin:0;color:var(--mute);font-size:14.5px;line-height:1.6}
+  @media (max-width:720px){.steps{grid-template-columns:1fr}}
+
+  /* sections-designed list */
+  .sect-list{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0 0;
+    border-top:1px solid var(--line)}
+  .sect-list li{list-style:none;display:grid;
+    grid-template-columns:48px 1fr auto;gap:24px;
+    padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .sect-list .n{font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--mute);font-variant-numeric:tabular-nums}
+  .sect-list .t{font-family:var(--display);font-size:18px;letter-spacing:-.01em;
+    color:var(--ink);font-weight:500}
+  .sect-list .d{font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--mute)}
+
+  /* pull-quote */
+  .pull{margin:60px 0;padding:32px 0;border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line)}
+  .pull q{font-family:var(--display);font-weight:400;
+    font-size:clamp(22px,2.6vw,30px);letter-spacing:-.015em;line-height:1.3;
+    color:var(--ink);quotes:"\201C""\201D";display:block;max-width:30ch}
+  .pull .src{margin-top:14px;font-family:var(--mono);font-size:11px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+
+  /* Figma CTA */
+  .cta{display:inline-flex;align-items:center;gap:10px;
+    padding:14px 22px;background:var(--accent);color:var(--accent-ink);
+    border-radius:999px;text-decoration:none;font-family:var(--body);
+    font-size:14.5px;font-weight:500;letter-spacing:-.005em;
+    border:1px solid rgba(255,255,255,.2);
+    transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
+  .cta:hover{transform:translateY(-2px);
+    box-shadow:0 18px 36px -16px rgba(0,0,0,.5)}
+  .cta svg{width:14px;height:14px}
+
+  /* result outcome card */
+  .result{margin:32px 0 0;padding:36px 36px;background:var(--accent);
+    color:var(--accent-ink);border-radius:18px;
+    box-shadow:0 18px 40px -22px rgba(245,139,170,.45)}
+  .result .eye{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:10px;display:block}
+  .result h3{font-family:var(--display);font-weight:500;
+    font-size:clamp(24px,3vw,34px);letter-spacing:-.018em;line-height:1.15;
+    color:inherit;margin:0;max-width:24ch}
+
+  /* next project */
+  .next{margin:80px auto 0;padding:48px 48px;
+    background:var(--accent);color:var(--accent-ink);border-radius:22px;
+    display:flex;justify-content:space-between;align-items:end;
+    text-decoration:none;gap:24px;flex-wrap:wrap;
+    transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+  .next:hover{transform:translateY(-4px)}
+  .next .eye{font-family:var(--body);font-weight:500;font-size:12px;
+    letter-spacing:.05em;text-transform:uppercase;opacity:.78}
+  .next h2{margin:6px 0 0;color:inherit;font-size:clamp(32px,4.5vw,52px);
+    letter-spacing:-.022em}
+  .next .arr{font-size:24px;opacity:.85}
+  @media (max-width:640px){.next{padding:32px 28px}}
+
+  footer{padding:48px 0 56px;color:var(--mute);font-family:var(--mono);
+    font-size:11px;letter-spacing:.04em;text-transform:uppercase;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer a{text-decoration:none}
+  footer a:hover{color:var(--ink)}
+
+  /* reveal */
+  .r{opacity:0;transform:translateY(14px);
+    transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .r.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .r{transition:none !important;opacity:1 !important;transform:none !important}
+  }
+</style>
+</head>
+
+<body>
+
+<div class="bar" id="bar">
+  <div class="bar-inner">
+    <a href="../Portfolio Simple.html" class="back">
+      <span class="a">←</span> Back to work
+    </a>
+    <div class="bar-mid"></div>
+    <button class="theme" id="themeBtn" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 16 16" fill="none" aria-hidden="true"></svg>
+      <span id="themeLabel">dark</span>
+    </button>
+  </div>
+</div>
+
+<div class="col wide">
+  <section class="break" style="padding-top:0">
+    <div class="cover">
+      <span class="eye">Kids &nbsp;/&nbsp; Brand &amp; Web</span>
+      <h1>Stomp! Stomp! Rhinos</h1>
+      <p class="lede">A vibrant online home for a children's animated show — designed so kids can dive into episodes and parents can navigate it just as easily.</p>
+      <div class="meta">
+        <div>
+          <span class="k">Role</span>
+          <span class="v">UI / UX Designer</span>
+        </div>
+        <div>
+          <span class="k">Project Type</span>
+          <span class="v">Marketing Website</span>
+        </div>
+        <div>
+          <span class="k">Studio</span>
+          <span class="v">Fuze Studio</span>
+        </div>
+        <div>
+          <span class="k">Tools</span>
+          <span class="v">Figma · FigJam</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Hero screenshot -->
+<div class="col wide">
+  <section class="break" style="padding-top:32px">
+    <div class="shot tall">
+      <img src="kids-show/01-hero.png" alt="Stomp! Stomp! Rhinos homepage hero — illustrated characters in a kitchen" />
+    </div>
+    <p class="cap"><b>Homepage hero</b>Illustrated characters carry the brand — the audience meets the cast before they read a single word.</p>
+  </section>
+</div>
+
+<!-- Overview -->
+<div class="col">
+  <section id="overview">
+    <div class="eyebrow"><span class="num">00</span><span>— Overview</span><span class="line"></span></div>
+    <h2>A bright, friendly home for an animated kids' show.</h2>
+    <p class="lede">A children's entertainment brand needed a website to host and showcase their animated show. The goal: create a fun, engaging platform where kids and parents could discover episodes, watch content, and connect with the brand.</p>
+  </section>
+</div>
+
+<!-- Problem -->
+<div class="col">
+  <section id="problem">
+    <div class="eyebrow"><span class="num">01</span><span>— The Problem</span><span class="line"></span></div>
+    <h2>A show with nowhere to live online.</h2>
+    <p>The client had an animated show ready, but no online home for it. Without a website, there was no way for their audience to find, watch, or follow the show. They needed a platform that felt exciting and on-brand for a young audience — while still being easy for parents to navigate.</p>
+  </section>
+</div>
+
+<!-- Process -->
+<div class="col">
+  <section id="process">
+    <div class="eyebrow"><span class="num">02</span><span>— My Process</span><span class="line"></span></div>
+    <h2>Discovery, design decisions, structure — in that order.</h2>
+    <p>The design had to feel like an extension of the show itself, not a separate marketing wrapper around it.</p>
+
+    <div class="steps">
+      <div class="step">
+        <p class="k">01 — Discovery</p>
+        <h3>Research what works for kids.</h3>
+        <p>Bright colors, playful typography, illustrated characters and simple navigation. The page had to feel like a place a kid would <em>want</em> to be — and that a parent wouldn't dread.</p>
+      </div>
+      <div class="step">
+        <p class="k">02 — Design</p>
+        <h3>Soft blue, friendly pink.</h3>
+        <p>A soft blue + pink palette to feel welcoming. The hero leads with full-bleed character illustrations to create an emotional connection on first scroll.</p>
+      </div>
+      <div class="step">
+        <p class="k">03 — Structure</p>
+        <h3>Meet → watch → browse → contact.</h3>
+        <p>The page guides visitors through a clear journey: meet the show, watch the latest episode, browse recent episodes, get in touch. Same loop every time.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Pull quote -->
+<div class="col">
+  <div class="pull">
+    <q>Every design decision — color, layout, type — had to communicate fun and energy before a single word was read.</q>
+    <div class="src">— Working principle</div>
+  </div>
+</div>
+
+<!-- Featured episode -->
+<div class="col">
+  <section id="featured">
+    <div class="eyebrow"><span class="num">03</span><span>— Featured Episode</span><span class="line"></span></div>
+    <h2>Hero a single episode. Make watching one tap away.</h2>
+    <p>Below the homepage hero, a featured episode block puts the latest release front and centre — title, season, rating, short synopsis, and two large CTAs: <em>Watch Trailer</em> and <em>Watch Now</em>. Pink border, soft drop shadow, illustrated background — it reads at a glance for a child and answers the parent's "what is this?" question at the same time.</p>
+  </section>
+</div>
+
+<div class="col wide">
+  <section class="break" style="padding-top:24px">
+    <div class="shot full">
+      <img src="kids-show/02-featured.png" alt="Featured Episode 1 block — Stomp! Stomp! Rhinos with Watch Trailer and Watch Now buttons" />
+    </div>
+    <p class="cap"><b>Featured episode card</b>One headline, one synopsis, two clear CTAs — no decision paralysis.</p>
+  </section>
+</div>
+
+<!-- Episode grid -->
+<div class="col">
+  <section id="episodes" style="padding-top:96px">
+    <div class="eyebrow"><span class="num">04</span><span>— Episode Grid</span><span class="line"></span></div>
+    <h2>Recently watched, with resume buttons that mean something.</h2>
+    <p>The "Recently Watched Episodes" block uses thumbnail-led cards with a "Resume" CTA so returning viewers can pick up exactly where they left off. The illustration style stays consistent with the hero — same characters, same world.</p>
+  </section>
+</div>
+
+<div class="col wide">
+  <section class="break" style="padding-top:24px">
+    <div class="shot full">
+      <img src="kids-show/03-episodes.png" alt="Recently Watched Episodes — three thumbnail cards with Episode 7, 8, 9 and Resume buttons" />
+    </div>
+    <p class="cap"><b>Episodes grid</b>Same card shape, same pink CTA — repetition is what makes the page feel safe to a kid clicking around.</p>
+  </section>
+</div>
+
+<!-- Sections list -->
+<div class="col">
+  <section id="sections" style="padding-top:96px">
+    <div class="eyebrow"><span class="num">05</span><span>— Sections Designed</span><span class="line"></span></div>
+    <h2>Five sections — covering the full page.</h2>
+    <ul class="sect-list">
+      <li><span class="n">01</span><span class="t">Hero with illustrated characters &amp; main navigation</span><span class="d">Top</span></li>
+      <li><span class="n">02</span><span class="t">Featured episode with Watch Trailer &amp; Watch Now CTAs</span><span class="d">Promo</span></li>
+      <li><span class="n">03</span><span class="t">Episode grid with resume-watching functionality</span><span class="d">Discovery</span></li>
+      <li><span class="n">04</span><span class="t">Contact form &amp; office details</span><span class="d">Parents</span></li>
+      <li><span class="n">05</span><span class="t">Footer with site links</span><span class="d">Bottom</span></li>
+    </ul>
+  </section>
+</div>
+
+<!-- Figma CTA -->
+<div class="col">
+  <section style="padding-top:64px">
+    <a class="cta" href="https://www.figma.com/design/xMUcZla1VvmfVzqE1A5lEu/Fuze-Studio-Projects?node-id=2255-2218" target="_blank" rel="noopener">
+      View the full file on Figma
+      <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </section>
+</div>
+
+<!-- Result -->
+<div class="col">
+  <section id="result">
+    <div class="eyebrow"><span class="num">06</span><span>— Result</span><span class="line"></span></div>
+    <h2>A vibrant online presence — designed for two audiences at once.</h2>
+    <p>A fully designed kids' entertainment website that gives the show a real online home, making it easy for families to discover and watch content.</p>
+
+    <div class="result">
+      <span class="eye">Outcome</span>
+      <h3>Animated show → branded online destination, kid-friendly and parent-navigable.</h3>
+    </div>
+  </section>
+</div>
+
+<!-- Reflection -->
+<div class="col">
+  <section id="reflection">
+    <div class="eyebrow"><span class="num">07</span><span>— What I Learned</span><span class="line"></span></div>
+    <h2>Visual storytelling lands before words do.</h2>
+    <p>Designing for kids taught me how much weight visual storytelling carries. Every design decision — from color to layout — had to communicate fun and energy <em>before</em> a single word was read. For adults you can lean on copy; for kids, the picture is the message.</p>
+    <p class="mute">If you're hiring and want to dig into any of this — what worked, what I'd change next time — <a href="../Portfolio Simple.html#contact" style="color:inherit">drop me a note</a>. I'm always up for a critique.</p>
+  </section>
+</div>
+
+<!-- Next -->
+<div class="col wide">
+  <section class="break">
+    <a class="next" href="Finance Banking App.html" style="--accent:#4756FF">
+      <div>
+        <div class="eye">Next project</div>
+        <h2>Finance Banking App →</h2>
+      </div>
+      <span class="arr">↗</span>
+    </a>
+  </section>
+</div>
+
+<div class="col">
+  <footer>
+    <div>© 2026 your name</div>
+    <div><a href="../Portfolio Simple.html">↑ Back to portfolio</a></div>
+    <div>Last updated 05.20.26</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var html = document.documentElement;
+  var btn = document.getElementById('themeBtn');
+  var label = document.getElementById('themeLabel');
+  var icon = document.getElementById('themeIcon');
+  var KEY = 'portfolio-simple-theme';
+  var MOON = '<path d="M13.2 9.4A5.6 5.6 0 0 1 6.6 2.8a5.6 5.6 0 1 0 6.6 6.6Z" fill="currentColor"/>';
+  var SUN  = '<circle cx="8" cy="8" r="3.1" fill="currentColor"/>'
+           + '<g stroke="currentColor" stroke-width="1.2" stroke-linecap="round">'
+           + '<path d="M8 1.6V3"/><path d="M8 13v1.4"/>'
+           + '<path d="M1.6 8H3"/><path d="M13 8h1.4"/>'
+           + '<path d="M3.4 3.4l1 1"/><path d="M11.6 11.6l1 1"/>'
+           + '<path d="M12.6 3.4l-1 1"/><path d="M4.4 11.6l-1 1"/></g>';
+  function setTheme(t){
+    html.dataset.theme = t;
+    if (t === 'dark') { label.textContent = 'light'; icon.innerHTML = SUN; }
+    else              { label.textContent = 'dark';  icon.innerHTML = MOON; }
+    try { localStorage.setItem(KEY, t); } catch(e){}
+  }
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) setTheme(saved); else setTheme('dark');
+  } catch(e) { setTheme('dark'); }
+  btn.addEventListener('click', function(){
+    setTheme(html.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
+
+  var bar = document.getElementById('bar');
+  window.addEventListener('scroll', function(){
+    if (window.scrollY > 12) bar.classList.add('scrolled');
+    else bar.classList.remove('scrolled');
+  }, { passive: true });
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var sel = ['section h2', 'section p', '.shot', '.steps .step',
+               '.sect-list li', '.pull', '.cta', '.result', '.next', 'footer > div'];
+    sel.forEach(function(s){
+      document.querySelectorAll(s).forEach(function(el){ el.classList.add('r'); });
+    });
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+    document.querySelectorAll('.r').forEach(function(el){ io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>

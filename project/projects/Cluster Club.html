@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cluster Club — Case Study</title>
+<meta name="description" content="Taking a snack brand from zero digital presence to a fully live e-commerce site." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#0E2625;
+    --ink:#EFEAE0;
+    --mute:rgba(239,234,224,.58);
+    --line:rgba(239,234,224,.14);
+    --line-soft:rgba(239,234,224,.07);
+    --surface:rgba(255,255,255,.05);
+    /* Cluster Club brand-inspired accent */
+    --accent:#7B3F1A;            /* roasted brown */
+    --accent-2:#FDF4B6;          /* cream */
+    --accent-ink:#FDF4B6;
+    --display:'Bricolage Grotesque','Inter',ui-sans-serif,sans-serif;
+    --body:'Inter',ui-sans-serif,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  }
+  html[data-theme="light"]{
+    --bg:#EFEAE0;
+    --ink:#1A1418;
+    --mute:rgba(26,20,24,.58);
+    --line:rgba(26,20,24,.12);
+    --line-soft:rgba(26,20,24,.06);
+    --surface:rgba(255,255,255,.6);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:var(--body);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+    transition:background .35s ease,color .35s ease}
+  html{scroll-behavior:smooth}
+  ::selection{background:var(--ink);color:var(--bg)}
+  a{color:inherit}
+
+  /* layout */
+  .col{max-width:760px;margin:0 auto;padding:0 28px}
+  .col.wide{max-width:1120px}
+  section.break{
+    position:relative;left:50%;transform:translateX(-50%);
+    width:min(1240px,calc(100vw - 56px))}
+
+  /* top bar */
+  .bar{position:sticky;top:0;z-index:20;
+    backdrop-filter:blur(18px) saturate(140%);
+    -webkit-backdrop-filter:blur(18px) saturate(140%);
+    background:color-mix(in oklab,var(--bg) 80%,transparent);
+    border-bottom:.5px solid transparent;transition:border-color .3s}
+  .bar.scrolled{border-bottom-color:var(--line)}
+  .bar-inner{display:flex;justify-content:space-between;align-items:center;
+    height:58px;max-width:1240px;margin:0 auto;padding:0 28px;gap:16px}
+  .back{text-decoration:none;color:var(--ink);font-family:var(--display);
+    font-weight:500;font-size:15px;letter-spacing:-.01em;
+    display:inline-flex;align-items:center;gap:8px}
+  .back .a{color:var(--mute);transition:transform .3s,color .3s;display:inline-block}
+  .back:hover .a{transform:translateX(-4px);color:var(--ink)}
+  .bar-mid{flex:1;text-align:center;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+  .theme{appearance:none;border:0;background:transparent;color:var(--mute);
+    font-family:var(--body);font-size:15px;cursor:pointer;padding:0;line-height:1;
+    display:inline-flex;align-items:center;gap:6px}
+  .theme:hover{color:var(--ink)}
+  .theme svg{width:14px;height:14px}
+
+  /* cover — uses brand accent */
+  .cover{margin:20px auto 0;padding:28px 32px 28px;
+    background:var(--accent);color:var(--accent-ink);
+    border-radius:14px;position:relative;overflow:hidden;
+    box-shadow:0 1px 0 rgba(255,255,255,.16) inset,0 18px 40px -22px rgba(0,0,0,.5);
+    max-width:880px}
+  .cover::before{content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(40% 60% at 90% 10%, rgba(253,244,182,.18), transparent 60%),
+      radial-gradient(30% 50% at 10% 95%, rgba(253,244,182,.12), transparent 70%);
+    pointer-events:none}
+  .cover .eye{font-family:var(--body);font-weight:500;font-size:11px;
+    letter-spacing:.06em;text-transform:uppercase;opacity:.78;position:relative}
+  .cover h1{font-family:var(--display);font-weight:500;
+    font-size:clamp(28px,3.6vw,44px);letter-spacing:-.022em;line-height:1.05;
+    margin:8px 0 12px;max-width:14ch;position:relative}
+  .cover .lede{font-size:14.5px;line-height:1.55;
+    max-width:54ch;opacity:.88;margin:0;position:relative}
+  .cover .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+    margin-top:22px;padding-top:16px;
+    border-top:1px solid rgba(253,244,182,.22);position:relative}
+  .cover .meta .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;
+    text-transform:uppercase;opacity:.6;margin-bottom:5px;display:block}
+  .cover .meta .v{font-family:var(--display);font-weight:400;font-size:14px;
+    letter-spacing:-.01em;line-height:1.3}
+  @media (max-width:720px){
+    .cover{padding:24px 22px;border-radius:12px}
+    .cover .meta{grid-template-columns:repeat(2,1fr);gap:14px}
+  }
+
+  /* section heads */
+  section{padding:80px 0 0}
+  .eyebrow{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--mute)}
+  .eyebrow .num{font-variant-numeric:tabular-nums;color:var(--ink);opacity:.8}
+  .eyebrow .line{flex:1;height:1px;background:var(--line)}
+  h2{font-family:var(--display);font-weight:500;
+    font-size:clamp(28px,3.6vw,42px);letter-spacing:-.02em;line-height:1.1;
+    margin:0 0 24px;color:var(--ink);max-width:22ch;text-wrap:pretty}
+  h3{font-family:var(--display);font-weight:500;font-size:22px;
+    letter-spacing:-.01em;line-height:1.25;margin:0 0 8px}
+
+  /* body type */
+  p{margin:0 0 18px;max-width:62ch;line-height:1.7;color:var(--ink)}
+  p.lede{font-size:19px;line-height:1.55;color:var(--ink);max-width:46ch}
+  p.mute{color:var(--mute)}
+
+  /* image cards */
+  .shot{position:relative;width:100%;border-radius:14px;overflow:hidden;
+    background:var(--surface);border:.5px solid var(--line);
+    box-shadow:0 14px 40px -22px rgba(0,0,0,.5);
+    display:block}
+  .shot img{display:block;width:100%;height:auto}
+  .shot.browser{padding-top:0;position:relative}
+  .browser .chrome{display:flex;align-items:center;gap:6px;
+    padding:10px 14px;background:rgba(0,0,0,.18);
+    border-bottom:1px solid rgba(255,255,255,.06)}
+  html[data-theme="light"] .browser .chrome{background:rgba(0,0,0,.04);
+    border-bottom:1px solid rgba(0,0,0,.06)}
+  .browser .chrome i{width:10px;height:10px;border-radius:50%;display:block}
+  .browser .chrome .d1{background:#FF5F57}
+  .browser .chrome .d2{background:#FEBC2E}
+  .browser .chrome .d3{background:#28C840}
+  .browser .chrome .url{margin-left:14px;font-family:var(--mono);font-size:11px;
+    color:var(--mute);letter-spacing:.02em}
+
+  /* image caption */
+  .cap{margin:14px 0 0;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.02em;color:var(--mute);max-width:62ch;line-height:1.55}
+  .cap b{color:var(--ink);font-weight:500;text-transform:uppercase;
+    letter-spacing:.06em;font-size:10.5px;margin-right:8px}
+
+  /* row of images */
+  .row{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .row.three{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:720px){.row,.row.three{grid-template-columns:1fr}}
+
+  /* process steps — three columns */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+    margin:24px 0 0}
+  .step{padding:24px;background:var(--surface);
+    border:.5px solid var(--line);border-radius:14px}
+  .step .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--mute);margin:0 0 14px}
+  .step h3{margin:0 0 8px;font-size:20px}
+  .step p{margin:0;color:var(--mute);font-size:14.5px;line-height:1.6}
+  @media (max-width:720px){.steps{grid-template-columns:1fr}}
+
+  /* pull-quote */
+  .pull{margin:60px 0;padding:32px 0;border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line)}
+  .pull q{font-family:var(--display);font-weight:400;
+    font-size:clamp(22px,2.6vw,30px);letter-spacing:-.015em;line-height:1.3;
+    color:var(--ink);quotes:"\201C""\201D";display:block;max-width:30ch}
+  .pull .src{margin-top:14px;font-family:var(--mono);font-size:11px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+
+  /* CTA button (Figma link) */
+  .cta{display:inline-flex;align-items:center;gap:10px;
+    padding:14px 22px;background:var(--accent);color:var(--accent-ink);
+    border-radius:999px;text-decoration:none;font-family:var(--body);
+    font-size:14.5px;font-weight:500;letter-spacing:-.005em;
+    border:1px solid rgba(253,244,182,.15);
+    transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
+  .cta:hover{transform:translateY(-2px);
+    box-shadow:0 18px 36px -16px rgba(0,0,0,.5)}
+  .cta svg{width:14px;height:14px}
+
+  /* result outcome card */
+  .result{margin:32px 0 0;padding:36px 36px;background:var(--accent-2);
+    color:#3a2a14;border-radius:18px;
+    box-shadow:0 18px 40px -22px rgba(0,0,0,.35)}
+  .result .eye{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:rgba(58,42,20,.6);margin-bottom:10px;display:block}
+  .result h3{font-family:var(--display);font-weight:500;
+    font-size:clamp(24px,3vw,34px);letter-spacing:-.018em;line-height:1.15;
+    color:inherit;margin:0;max-width:24ch}
+  html[data-theme="dark"] .result h3,
+  html[data-theme="dark"] .result .eye{color:inherit}
+
+  /* next project card */
+  .next{margin:80px auto 0;padding:48px 48px;
+    background:var(--accent);color:var(--accent-ink);border-radius:22px;
+    display:flex;justify-content:space-between;align-items:end;
+    text-decoration:none;gap:24px;flex-wrap:wrap;
+    transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+  .next:hover{transform:translateY(-4px)}
+  .next .eye{font-family:var(--body);font-weight:500;font-size:12px;
+    letter-spacing:.05em;text-transform:uppercase;opacity:.78}
+  .next h2{margin:6px 0 0;color:inherit;font-size:clamp(32px,4.5vw,52px);
+    letter-spacing:-.022em}
+  .next .arr{font-size:24px;opacity:.85}
+  @media (max-width:640px){.next{padding:32px 28px}}
+
+  footer{padding:48px 0 56px;color:var(--mute);font-family:var(--mono);
+    font-size:11px;letter-spacing:.04em;text-transform:uppercase;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer a{text-decoration:none}
+  footer a:hover{color:var(--ink)}
+
+  /* reveal */
+  .r{opacity:0;transform:translateY(14px);
+    transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .r.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .r{transition:none !important;opacity:1 !important;transform:none !important}
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ── Top bar ─────────────────────────────────────────────────────────── -->
+<div class="bar" id="bar">
+  <div class="bar-inner">
+    <a href="../Portfolio Simple.html" class="back">
+      <span class="a">←</span> Back to work
+    </a>
+    <div class="bar-mid">Cluster Club · Case Study</div>
+    <button class="theme" id="themeBtn" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 16 16" fill="none" aria-hidden="true"></svg>
+      <span id="themeLabel">dark</span>
+    </button>
+  </div>
+</div>
+
+<!-- ── Cover ───────────────────────────────────────────────────────────── -->
+<div class="col wide">
+  <section class="break" style="padding-top:0">
+    <div class="cover">
+      <span class="eye">E-commerce &nbsp;/&nbsp; UI &amp; UX</span>
+      <h1>Cluster Club</h1>
+      <p class="lede" style="color: rgb(255, 255, 255)">Taking a snack brand from zero digital presence to a fully live, shoppable e-commerce site — designed and launched fast.</p>
+      <div class="meta">
+        <div>
+          <span class="k">Role</span>
+          <span class="v">UI / UX Designer</span>
+        </div>
+        <div>
+          <span class="k">Project Type</span>
+          <span class="v">E-commerce Website</span>
+        </div>
+        <div>
+          <span class="k">Timeline</span>
+          <span class="v">April – May 2025</span>
+        </div>
+        <div>
+          <span class="k">Tools</span>
+          <span class="v">Figma · FigJam</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ── Hero image ──────────────────────────────────────────────────────── -->
+<div class="col wide">
+  <section class="break" style="padding-top:40px">
+    <div class="shot browser">
+      <div class="chrome">
+        <i class="d1"></i><i class="d2"></i><i class="d3"></i>
+        <span class="url">clusterclub.com</span>
+      </div>
+      <img src="cluster-club/01-home.png" alt="Cluster Club homepage" style="width: 1272px; height: 851px" />
+    </div>
+    <p class="cap"><b>Homepage</b>The hero arranges the three Cluster Club flavours over an oversized brand wordmark watermark, with the brand stats anchoring the bottom.</p>
+  </section>
+</div>
+
+<!-- ── Overview ────────────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="overview">
+    <div class="eyebrow"><span class="num">00</span><span>— Overview</span><span class="line"></span></div>
+    <h2>From zero digital presence to a fully shoppable website.</h2>
+    <p class="lede">Cluster Club is an e-commerce brand that came to Fuze Studio with no website. They had a product ready to sell but nowhere to sell it from. My job was to take them from zero to a fully live, shoppable site.</p>
+  </section>
+</div>
+
+<!-- ── Problem ────────────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="problem">
+    <div class="eyebrow"><span class="num">01</span><span>— Problem</span><span class="line"></span></div>
+    <h2>No website meant no way to reach customers — or look credible doing it.</h2>
+    <p>Without a digital home, Cluster Club had no way to communicate the brand or to convert interest into orders. They needed a site that looked credible, felt on-brand, and turned visitors into buyers — built and launched fast.</p>
+  </section>
+</div>
+
+<!-- ── Process ─────────────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="process">
+    <div class="eyebrow"><span class="num">02</span><span>— Process</span><span class="line"></span></div>
+    <h2>Discovery, wireframes, design — in that order, on purpose.</h2>
+    <p>I worked in three clear stages so the design decisions sat on top of a real understanding of the brand and the buyer flow — not the other way around.</p>
+
+    <div class="steps">
+      <div class="step">
+        <p class="k">01 — Discovery</p>
+        <h3>Understand the brand &amp; the buyer.</h3>
+        <p>Who Cluster Club's customers are, what feeling they wanted to create, and what similar brands in the space looked like. This gave me a clear direction before opening Figma.</p>
+      </div>
+      <div class="step">
+        <p class="k">02 — Wireframes</p>
+        <h3>Map the path to purchase.</h3>
+        <p>I laid out the key pages and the user flow first — homepage, product page, checkout. The goal was to make the path to purchase as frictionless as possible.</p>
+      </div>
+      <div class="step">
+        <p class="k">03 — Design</p>
+        <h3>Make it easy to buy.</h3>
+        <p>The full site in Figma — clean layout, strong product imagery, clear calls to action. Every decision was checked against one question: <em>does this make it easier to buy?</em></p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ── Pull quote ──────────────────────────────────────────────────────── -->
+<div class="col">
+  <div class="pull">
+    <q>Every design decision was made with one question in mind: does this make it easier for someone to buy?</q>
+    <div class="src">— Working principle, design phase</div>
+  </div>
+</div>
+
+<!-- ── Design — product pages ──────────────────────────────────────────── -->
+<div class="col">
+  <section id="product">
+    <div class="eyebrow"><span class="num">03</span><span>— Product Pages</span><span class="line"></span></div>
+    <h2>One flavour per band — the page is the catalogue.</h2>
+    <p>Rather than a generic grid, each flavour gets a full-width colour band of its own. The product photography, price, rating, and category breadcrumb all sit on a background that matches the bag — so a quick scroll feels like flipping through the lineup.</p>
+  </section>
+</div>
+
+<div class="col wide">
+  <section class="break" style="padding-top:24px">
+    <div class="shot browser">
+      <div class="chrome">
+        <i class="d1"></i><i class="d2"></i><i class="d3"></i>
+        <span class="url">clusterclub.com / flavours</span>
+      </div>
+      <img src="cluster-club/02-products.png" alt="Cluster Club product pages — three flavour bands stacked vertically" />
+    </div>
+    <p class="cap"><b>Product detail</b>Three flavours, three colour bands, three identical price/rating modules. Repetition is the system.</p>
+  </section>
+</div>
+
+<!-- ── Design — about & stores ────────────────────────────────────────── -->
+<div class="col">
+  <section id="about" style="padding-top:96px">
+    <div class="eyebrow"><span class="num">04</span><span>— About &amp; Stockists</span><span class="line"></span></div>
+    <h2>Credibility through stockist logos and a clear brand story.</h2>
+    <p>Visitors who land on a brand-new site need quick reasons to trust it. The <em>About Us</em> section pairs the product lineup with the brand story; <em>Our Stores</em> lists the major retailers carrying Cluster Club — a fast credibility cue without needing testimonials yet.</p>
+  </section>
+</div>
+
+<div class="col wide">
+  <section class="break" style="padding-top:24px">
+    <div class="shot browser">
+      <div class="chrome">
+        <i class="d1"></i><i class="d2"></i><i class="d3"></i>
+        <span class="url">clusterclub.com / about</span>
+      </div>
+      <img src="cluster-club/03-about.png" alt="About Us section showing all three product bags, and Our Stores with retailer logos" />
+    </div>
+    <p class="cap"><b>About &amp; Our Stores</b>EG Group, ASDA and Aldi logos answer the unspoken "is this real?" question on first visit.</p>
+  </section>
+</div>
+
+<!-- ── Design — FAQ & footer ──────────────────────────────────────────── -->
+<div class="col">
+  <section id="faq" style="padding-top:96px">
+    <div class="eyebrow"><span class="num">05</span><span>— FAQ &amp; Footer</span><span class="line"></span></div>
+    <h2>The page closes with the questions that block a first order.</h2>
+    <p>An accordion FAQ at the bottom catches the common pre-purchase doubts — returns, billing, account — before the user has to dig for them. The footer keeps the navigation tight and groups company / help / resources in three clean columns.</p>
+  </section>
+</div>
+
+<div class="col wide">
+  <section class="break" style="padding-top:24px">
+    <div class="shot browser">
+      <div class="chrome">
+        <i class="d1"></i><i class="d2"></i><i class="d3"></i>
+        <span class="url">clusterclub.com / faq</span>
+      </div>
+      <img src="cluster-club/04-faq.png" alt="FAQ accordion section with footer below" />
+    </div>
+    <p class="cap"><b>FAQ &amp; footer</b>One open answer up top sets the pattern; the rest stay collapsed so the page stays scannable.</p>
+  </section>
+</div>
+
+<!-- ── Figma CTA ───────────────────────────────────────────────────────── -->
+<div class="col">
+  <section style="padding-top:64px">
+    <a class="cta" href="https://www.figma.com/design/xMUcZla1VvmfVzqE1A5lEu/Fuze-Studio-Projects?node-id=2255-2218" target="_blank" rel="noopener">
+      View the full file on Figma
+      <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </section>
+</div>
+
+<!-- ── Result ──────────────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="result">
+    <div class="eyebrow"><span class="num">06</span><span>— Result</span><span class="line"></span></div>
+    <h2>Live, shoppable, on time.</h2>
+    <p>Cluster Club went from having no online presence to a fully live e-commerce website. The client was happy with both the speed of delivery and the final product — calling the result exactly what they envisioned.</p>
+
+    <div class="result">
+      <span class="eye">Outcome</span>
+      <h3>Brand → shoppable site, delivered inside the two-month window.</h3>
+    </div>
+  </section>
+</div>
+
+<!-- ── Reflection ──────────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="reflection">
+    <div class="eyebrow"><span class="num">07</span><span>— What I Learned</span><span class="line"></span></div>
+    <h2>Nail the flow first. Everything else gets easier.</h2>
+    <p>This project reinforced how important it is to nail the user flow <em>before</em> designing screens. Getting the structure right early meant fewer revisions, a faster build, and a final site that did the one job the brief asked for — make it easy to buy.</p>
+    <p class="mute">If you're hiring and want to dig into any of this — what worked, what I'd change next time — <a href="../Portfolio Simple.html#contact" style="color:inherit">drop me a note</a>. I'm always up for a critique.</p>
+  </section>
+</div>
+
+<!-- ── Next ────────────────────────────────────────────────────────────── -->
+<div class="col wide">
+  <section class="break">
+    <a class="next" href="../projects/Stomp Stomp Rhinos.html" style="--accent:#F58BAA">
+      <div>
+        <div class="eye">Next project</div>
+        <h2>Stomp! Stomp! Rhinos →</h2>
+      </div>
+      <span class="arr">↗</span>
+    </a>
+  </section>
+</div>
+
+<div class="col">
+  <footer>
+    <div>© 2026 your name</div>
+    <div><a href="../Portfolio Simple.html">↑ Back to portfolio</a></div>
+    <div>Last updated 05.20.26</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  // ── theme toggle, persisted (shares key with portfolio)
+  var html = document.documentElement;
+  var btn = document.getElementById('themeBtn');
+  var label = document.getElementById('themeLabel');
+  var icon = document.getElementById('themeIcon');
+  var KEY = 'portfolio-simple-theme';
+  var MOON = '<path d="M13.2 9.4A5.6 5.6 0 0 1 6.6 2.8a5.6 5.6 0 1 0 6.6 6.6Z" fill="currentColor"/>';
+  var SUN  = '<circle cx="8" cy="8" r="3.1" fill="currentColor"/>'
+           + '<g stroke="currentColor" stroke-width="1.2" stroke-linecap="round">'
+           + '<path d="M8 1.6V3"/><path d="M8 13v1.4"/>'
+           + '<path d="M1.6 8H3"/><path d="M13 8h1.4"/>'
+           + '<path d="M3.4 3.4l1 1"/><path d="M11.6 11.6l1 1"/>'
+           + '<path d="M12.6 3.4l-1 1"/><path d="M4.4 11.6l-1 1"/></g>';
+  function setTheme(t){
+    html.dataset.theme = t;
+    if (t === 'dark') { label.textContent = 'light'; icon.innerHTML = SUN; }
+    else              { label.textContent = 'dark';  icon.innerHTML = MOON; }
+    try { localStorage.setItem(KEY, t); } catch(e){}
+  }
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) setTheme(saved); else setTheme('dark');
+  } catch(e) { setTheme('dark'); }
+  btn.addEventListener('click', function(){
+    setTheme(html.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
+
+  // ── top bar border on scroll
+  var bar = document.getElementById('bar');
+  window.addEventListener('scroll', function(){
+    if (window.scrollY > 12) bar.classList.add('scrolled');
+    else bar.classList.remove('scrolled');
+  }, { passive: true });
+
+  // ── reveal on scroll
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var sel = ['section h2', 'section p', '.shot', '.steps .step',
+               '.pull', '.cta', '.result', '.next', 'footer > div'];
+    sel.forEach(function(s){
+      document.querySelectorAll(s).forEach(function(el){ el.classList.add('r'); });
+    });
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+    document.querySelectorAll('.r').forEach(function(el){ io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
