@@ -79,6 +79,11 @@
     border-radius:14px;position:relative;overflow:hidden;
     box-shadow:0 18px 40px -22px rgba(0,0,0,.5);
     max-width:880px}
+  .cover::before{content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(40% 60% at 90% 10%, rgba(0,0,0,.18), transparent 60%),
+      radial-gradient(30% 50% at 10% 95%, rgba(0,0,0,.14), transparent 70%);
+    pointer-events:none}
   .cover .eye{font-family:var(--body);font-weight:500;font-size:11px;
     letter-spacing:.06em;text-transform:uppercase;opacity:.78;position:relative}
   .cover h1{font-family:var(--display);font-weight:500;
@@ -439,7 +444,7 @@
 <!-- ── Next ────────────────────────────────────────────────────────────── -->
 <div class="col wide">
   <section class="break">
-    <a class="next" href="../projects/Stomp Stomp Rhinos.html" style="--accent:#E04E7E">
+    <a class="next" href="../projects/Stomp Stomp Rhinos.html" style="--accent:#EA6C94">
       <div>
         <div class="eye">Next project</div>
         <h2>Stomp! Stomp! Rhinos →</h2>
