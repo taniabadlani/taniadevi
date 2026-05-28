@@ -521,8 +521,12 @@
     var sel = ['section h2', 'section p', '.shot', '.steps .step',
                '.pull', '.tokens .tok', '.result', '.next', 'footer > div',
                '.eyebrow', '.row > *'];
+    var vh = window.innerHeight;
     sel.forEach(function(s){
-      document.querySelectorAll(s).forEach(function(el){ el.classList.add('r'); });
+      document.querySelectorAll(s).forEach(function(el){
+        if (el.getBoundingClientRect().top < vh) return;
+        el.classList.add('r');
+      });
     });
     var io = new IntersectionObserver(function(es){
       es.forEach(function(e){
