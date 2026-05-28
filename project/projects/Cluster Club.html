@@ -194,6 +194,23 @@
   html[data-theme="dark"] .result h3,
   html[data-theme="dark"] .result .eye{color:inherit}
 
+  /* client testimonial card */
+  .testimonial{margin:24px 0 0;padding:32px;background:var(--surface);
+    border:.5px solid var(--line);border-radius:18px;max-width:62ch}
+  .testimonial .stars{display:flex;gap:3px;margin-bottom:18px;color:#F2B500}
+  .testimonial .stars svg{width:18px;height:18px;display:block}
+  .testimonial q{font-family:var(--display);font-weight:400;
+    font-size:clamp(20px,2.2vw,26px);letter-spacing:-.015em;line-height:1.4;
+    color:var(--ink);quotes:"\201C""\201D";display:block;max-width:40ch}
+  .testimonial .who{margin-top:20px;display:flex;align-items:center;gap:12px;
+    font-family:var(--body);font-size:13.5px;color:var(--mute)}
+  .testimonial .who .av{width:36px;height:36px;border-radius:50%;
+    background:var(--accent);color:var(--accent-ink);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);font-weight:500;font-size:15px;flex-shrink:0}
+  .testimonial .who b{font-weight:500;color:var(--ink)}
+  @media (max-width:560px){.testimonial{padding:24px}}
+
   /* next project card */
   .next{margin:48px auto 0;padding:48px 48px;
     background:var(--accent);color:var(--accent-ink);border-radius:22px;
@@ -445,10 +462,32 @@
   </section>
 </div>
 
+<!-- ── Client feedback ─────────────────────────────────────────────────── -->
+<div class="col">
+  <section id="testimonial">
+    <div class="eyebrow"><span class="num">07</span><span>- Client Feedback</span><span class="line"></span></div>
+    <h2>What the client said.</h2>
+    <div class="testimonial">
+      <div class="stars" aria-label="5 out of 5 stars">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.6l1.94 4.18 4.6.49-3.42 3.13.95 4.5L8 11.6 3.93 13.9l.95-4.5L1.46 6.27l4.6-.49z"/></svg>
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.6l1.94 4.18 4.6.49-3.42 3.13.95 4.5L8 11.6 3.93 13.9l.95-4.5L1.46 6.27l4.6-.49z"/></svg>
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.6l1.94 4.18 4.6.49-3.42 3.13.95 4.5L8 11.6 3.93 13.9l.95-4.5L1.46 6.27l4.6-.49z"/></svg>
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.6l1.94 4.18 4.6.49-3.42 3.13.95 4.5L8 11.6 3.93 13.9l.95-4.5L1.46 6.27l4.6-.49z"/></svg>
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.6l1.94 4.18 4.6.49-3.42 3.13.95 4.5L8 11.6 3.93 13.9l.95-4.5L1.46 6.27l4.6-.49z"/></svg>
+      </div>
+      <q>Tania's ability to grasp our idea was next to none. She understood what we needed and delivered in a timely manner. Really pleased with the finished website and service.</q>
+      <div class="who">
+        <span class="av">C</span>
+        <span><b>Cluster Club</b> &nbsp;·&nbsp; Google review</span>
+      </div>
+    </div>
+  </section>
+</div>
+
 <!-- ── Reflection ──────────────────────────────────────────────────────── -->
 <div class="col">
   <section id="reflection">
-    <div class="eyebrow"><span class="num">07</span><span>- What I Learned</span><span class="line"></span></div>
+    <div class="eyebrow"><span class="num">08</span><span>- What I Learned</span><span class="line"></span></div>
     <h2>Nail the flow first. Everything else gets easier.</h2>
     <p>This project reinforced how important it is to nail the user flow <em>before</em> designing screens. Getting the structure right early meant fewer revisions, a faster build, and a final site that did the one job the brief asked for - make it easy to buy.</p>
     <p class="mute">If you're hiring and want to dig into any of this - what worked, what I'd change next time - <a href="../Portfolio Simple.html#contact" style="color:inherit">drop me a note</a>. I'm always up for a critique.</p>
@@ -514,7 +553,7 @@
   // ── reveal on scroll
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     var sel = ['section h2', 'section p', '.shot', '.steps .step',
-               '.pull', '.cta', '.result', '.next', 'footer > div',
+               '.pull', '.cta', '.result', '.testimonial', '.next', 'footer > div',
                '.eyebrow', '.row > *'];
     var vh = window.innerHeight;
     sel.forEach(function(s){
