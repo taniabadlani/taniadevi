@@ -104,7 +104,7 @@
   }
 
   /* section heads */
-  section{padding:80px 0 0}
+  section{padding:48px 0 0}
   .eyebrow{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;
     font-family:var(--mono);font-size:11px;letter-spacing:.06em;
     text-transform:uppercase;color:var(--mute)}
@@ -163,7 +163,7 @@
   @media (max-width:720px){.steps{grid-template-columns:1fr}}
 
   /* pull-quote */
-  .pull{margin:60px 0;padding:32px 0;border-top:1px solid var(--line);
+  .pull{margin:32px 0;padding:24px 0;border-top:1px solid var(--line);
     border-bottom:1px solid var(--line)}
   .pull q{font-family:var(--display);font-weight:400;
     font-size:clamp(22px,2.6vw,30px);letter-spacing:-.015em;line-height:1.3;
@@ -195,7 +195,7 @@
   html[data-theme="dark"] .result .eye{color:inherit}
 
   /* next project card */
-  .next{margin:80px auto 0;padding:48px 48px;
+  .next{margin:48px auto 0;padding:48px 48px;
     background:var(--accent);color:var(--accent-ink);border-radius:22px;
     display:flex;justify-content:space-between;align-items:end;
     text-decoration:none;gap:24px;flex-wrap:wrap;
@@ -218,8 +218,22 @@
   .r{opacity:0;transform:translateY(14px);
     transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
   .r.in{opacity:1;transform:none}
+  .steps .step.r:nth-child(2){transition-delay:.08s}
+  .steps .step.r:nth-child(3){transition-delay:.16s}
+  .row > .r:nth-child(2){transition-delay:.08s}
+  .row > .r:nth-child(3){transition-delay:.16s}
+  .eyebrow .line{transform-origin:left center;transform:scaleX(0);
+    transition:transform .9s cubic-bezier(.2,.7,.2,1) .15s}
+  .eyebrow.in .line{transform:scaleX(1)}
+  .shot.r{transition:opacity .9s cubic-bezier(.2,.7,.2,1),
+                     transform .4s cubic-bezier(.2,.7,.2,1),
+                     box-shadow .4s cubic-bezier(.2,.7,.2,1)}
+  .shot:hover{transform:translateY(-4px);
+    box-shadow:0 26px 56px -22px rgba(0,0,0,.6)}
   @media (prefers-reduced-motion: reduce){
     .r{transition:none !important;opacity:1 !important;transform:none !important}
+    .eyebrow .line{transition:none !important;transform:none !important}
+    .shot:hover{transform:none !important}
   }
 </style>
 </head>
@@ -274,7 +288,7 @@
 
 <!-- ── Hero image ──────────────────────────────────────────────────────── -->
 <div class="col wide">
-  <section class="break" style="padding-top:40px">
+  <section class="break">
     <div class="shot browser">
       <div class="chrome">
         <i class="d1"></i><i class="d2"></i><i class="d3"></i>
@@ -349,7 +363,7 @@
 </div>
 
 <div class="col wide">
-  <section class="break" style="padding-top:24px">
+  <section class="break">
     <div class="shot browser">
       <div class="chrome">
         <i class="d1"></i><i class="d2"></i><i class="d3"></i>
@@ -363,7 +377,7 @@
 
 <!-- ── Design - about & stores ────────────────────────────────────────── -->
 <div class="col">
-  <section id="about" style="padding-top:96px">
+  <section id="about">
     <div class="eyebrow"><span class="num">04</span><span>- About &amp; Stockists</span><span class="line"></span></div>
     <h2>Credibility through stockist logos and a clear brand story.</h2>
     <p>Visitors who land on a brand-new site need quick reasons to trust it. The <em>About Us</em> section pairs the product lineup with the brand story; <em>Our Stores</em> lists the major retailers carrying Cluster Club - a fast credibility cue without needing testimonials yet.</p>
@@ -371,7 +385,7 @@
 </div>
 
 <div class="col wide">
-  <section class="break" style="padding-top:24px">
+  <section class="break">
     <div class="shot browser">
       <div class="chrome">
         <i class="d1"></i><i class="d2"></i><i class="d3"></i>
@@ -385,7 +399,7 @@
 
 <!-- ── Design - FAQ & footer ──────────────────────────────────────────── -->
 <div class="col">
-  <section id="faq" style="padding-top:96px">
+  <section id="faq">
     <div class="eyebrow"><span class="num">05</span><span>- FAQ &amp; Footer</span><span class="line"></span></div>
     <h2>The page closes with the questions that block a first order.</h2>
     <p>An accordion FAQ at the bottom catches the common pre-purchase doubts - returns, billing, account - before the user has to dig for them. The footer keeps the navigation tight and groups company / help / resources in three clean columns.</p>
@@ -393,7 +407,7 @@
 </div>
 
 <div class="col wide">
-  <section class="break" style="padding-top:24px">
+  <section class="break">
     <div class="shot browser">
       <div class="chrome">
         <i class="d1"></i><i class="d2"></i><i class="d3"></i>
@@ -407,7 +421,7 @@
 
 <!-- ── Figma CTA ───────────────────────────────────────────────────────── -->
 <div class="col">
-  <section style="padding-top:64px">
+  <section>
     <a class="cta" href="https://www.figma.com/design/xMUcZla1VvmfVzqE1A5lEu/Fuze-Studio-Projects?node-id=2255-2218" target="_blank" rel="noopener">
       View the full file on Figma
       <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -500,7 +514,8 @@
   // ── reveal on scroll
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     var sel = ['section h2', 'section p', '.shot', '.steps .step',
-               '.pull', '.cta', '.result', '.next', 'footer > div'];
+               '.pull', '.cta', '.result', '.next', 'footer > div',
+               '.eyebrow', '.row > *'];
     sel.forEach(function(s){
       document.querySelectorAll(s).forEach(function(el){ el.classList.add('r'); });
     });

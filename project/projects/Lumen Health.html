@@ -97,7 +97,7 @@
   }
 
   /* section heads */
-  section{padding:80px 0 0}
+  section{padding:48px 0 0}
   .eyebrow{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;
     font-family:var(--mono);font-size:11px;letter-spacing:.06em;
     text-transform:uppercase;color:var(--mute)}
@@ -153,7 +153,7 @@
   @media (max-width:720px){.row{grid-template-columns:1fr}}
 
   /* pull-quote */
-  .pull{margin:60px 0;padding:32px 0;border-top:1px solid var(--line);
+  .pull{margin:32px 0;padding:24px 0;border-top:1px solid var(--line);
     border-bottom:1px solid var(--line)}
   .pull q{font-family:var(--display);font-weight:400;
     font-size:clamp(24px,3vw,34px);letter-spacing:-.015em;line-height:1.25;
@@ -174,7 +174,7 @@
   ol.decisions p{margin:0;color:var(--mute);font-size:15.5px;max-width:54ch}
 
   /* next project card */
-  .next{margin:80px auto 0;padding:48px 48px;
+  .next{margin:48px auto 0;padding:48px 48px;
     background:var(--accent);color:var(--accent-ink);border-radius:22px;
     display:flex;justify-content:space-between;align-items:end;
     text-decoration:none;gap:24px;flex-wrap:wrap;
@@ -197,8 +197,20 @@
   .r{opacity:0;transform:translateY(14px);
     transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
   .r.in{opacity:1;transform:none}
+  .row > .r:nth-child(2){transition-delay:.08s}
+  .row > .r:nth-child(3){transition-delay:.16s}
+  .eyebrow .line{transform-origin:left center;transform:scaleX(0);
+    transition:transform .9s cubic-bezier(.2,.7,.2,1) .15s}
+  .eyebrow.in .line{transform:scaleX(1)}
+  .img.r{transition:opacity .9s cubic-bezier(.2,.7,.2,1),
+                    transform .4s cubic-bezier(.2,.7,.2,1),
+                    box-shadow .4s cubic-bezier(.2,.7,.2,1)}
+  .img:hover{transform:translateY(-4px);
+    box-shadow:0 26px 56px -22px rgba(0,0,0,.6)}
   @media (prefers-reduced-motion: reduce){
     .r{transition:none !important;opacity:1 !important;transform:none !important}
+    .eyebrow .line{transition:none !important;transform:none !important}
+    .img:hover{transform:none !important}
   }
 </style>
 </head>
@@ -253,7 +265,7 @@
 
 <!-- ── Hero image ──────────────────────────────────────────────────────── -->
 <div class="col wide">
-  <section class="break" style="padding-top:40px">
+  <section class="break">
     <div class="img wide">
       <span class="lbl">drop hero image</span>
       <span class="ref">01 / hero</span>
@@ -305,7 +317,7 @@
 </div>
 
 <div class="col wide">
-  <section class="break" style="padding-top:24px">
+  <section class="break">
     <div class="row">
       <div>
         <div class="img tall"><span class="lbl">audit screen 01</span></div>
@@ -341,7 +353,7 @@
 </div>
 
 <div class="col wide">
-  <section class="break" style="padding-top:24px">
+  <section class="break">
     <div class="row">
       <div><div class="img square"><span class="lbl">sketch round 01</span></div><p class="cap"><b>Attempt 01</b>Chat metaphor - too cute, broke at scale.</p></div>
       <div><div class="img square"><span class="lbl">sketch round 02</span></div><p class="cap"><b>Attempt 02</b>Card stack - felt like a quiz, not a clinic.</p></div>
@@ -388,7 +400,7 @@
 </div>
 
 <div class="col wide">
-  <section class="break" style="padding-top:24px">
+  <section class="break">
     <div class="img wide"><span class="lbl">final screens - overview</span><span class="ref">05 / overview</span></div>
     <div class="row two" style="margin-top:16px">
       <div><div class="img tall"><span class="lbl">screen 01 - welcome</span></div></div>
@@ -471,7 +483,7 @@
   // ── reveal on scroll
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     var sel = ['section h2', 'section p', 'section .facts', '.img', '.row > div',
-               '.pull', 'ol.decisions li', '.next', 'footer > div'];
+               '.pull', 'ol.decisions li', '.next', 'footer > div', '.eyebrow'];
     sel.forEach(function(s){
       document.querySelectorAll(s).forEach(function(el){ el.classList.add('r'); });
     });
