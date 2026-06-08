@@ -238,6 +238,19 @@
     left:50%;top:0;transform:translateX(-50%);
     width:14%;height:3px;background:#5a5a5a;
     border-radius:0 0 6px 6px}
+
+  /* phone mockup frame */
+  .device-phone{position:relative;width:100%;max-width:240px;
+    padding:8px;background:#0e0e0e;border-radius:36px;
+    box-shadow:0 22px 44px -16px rgba(0,0,0,.5)}
+  .device-phone::before{content:"";position:absolute;
+    top:14px;left:50%;transform:translateX(-50%);
+    width:34%;height:20px;background:#0e0e0e;
+    border-radius:0 0 14px 14px;z-index:2}
+  .device-phone .screen{position:relative;overflow:hidden;
+    aspect-ratio:9/19.5;background:#fff;border-radius:28px}
+  .device-phone .screen img{display:block;width:100%;height:100%;
+    object-fit:cover;object-position:top}
   .proj-content{display:flex;flex-direction:column;align-items:flex-start}
   .proj-content .eye{font-family:var(--body);font-weight:500;font-size:12.5px;
     letter-spacing:.06em;text-transform:uppercase;color:var(--mute);
@@ -501,7 +514,11 @@
 
       <div class="proj r" style="--brand:#4756FF">
         <div class="proj-media">
-          <img src="projects/finance-app/cover.png" alt="Finance Banking App screens" />
+          <div class="device-phone">
+            <div class="screen">
+              <img src="projects/finance-app/home-screen.png" alt="Finance Banking App home screen" />
+            </div>
+          </div>
         </div>
         <div class="proj-content">
           <div class="eye">Mobile &nbsp;/&nbsp; UI Case Study</div>
