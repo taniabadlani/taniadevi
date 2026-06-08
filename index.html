@@ -217,6 +217,7 @@
     gap:clamp(32px,5vw,72px);align-items:center}
   .proj:nth-child(even) .proj-media{order:2}
   .proj-media{position:relative;border-radius:28px;
+    padding:clamp(22px,3vw,44px);
     display:flex;align-items:center;justify-content:center;
     min-height:360px;overflow:hidden;
     background:color-mix(in oklab, var(--brand) 9%, transparent)}
@@ -224,8 +225,24 @@
     width:70%;height:70%;left:15%;top:15%;
     background:radial-gradient(closest-side, var(--brand), transparent 70%);
     opacity:.22;filter:blur(40px);pointer-events:none}
-  .proj-media img{position:relative;width:100%;height:auto;
-    display:block;object-fit:cover}
+  .proj-media > img{position:relative;width:100%;height:auto;
+    display:block;border-radius:10px;
+    box-shadow:0 24px 50px -20px rgba(0,0,0,.45)}
+
+  /* laptop mockup frame */
+  .device-laptop{position:relative;width:100%;max-width:640px}
+  .device-laptop .screen{background:#1a1a1a;padding:8px 8px 8px;
+    border-radius:10px 10px 2px 2px;
+    box-shadow:0 20px 40px -16px rgba(0,0,0,.45)}
+  .device-laptop .screen img{display:block;width:100%;height:auto;
+    border-radius:3px}
+  .device-laptop .base{height:8px;margin:0 -28px;
+    background:linear-gradient(180deg,#e2e2e2 0%,#bcbcbc 50%,#8a8a8a 100%);
+    border-radius:0 0 10px 10px;position:relative}
+  .device-laptop .base::after{content:"";position:absolute;
+    left:50%;top:0;transform:translateX(-50%);
+    width:14%;height:3px;background:#5a5a5a;
+    border-radius:0 0 6px 6px}
   .proj-content{display:flex;flex-direction:column;align-items:flex-start}
   .proj-content .eye{font-family:var(--body);font-weight:500;font-size:12.5px;
     letter-spacing:.06em;text-transform:uppercase;color:var(--mute);
@@ -467,7 +484,12 @@
 
       <div class="proj r" style="--brand:#7B3F1A">
         <div class="proj-media">
-          <img src="project/projects/cluster-club/01-home.png" alt="Cluster Club homepage" />
+          <div class="device-laptop">
+            <div class="screen">
+              <img src="project/projects/cluster-club/01-home.png" alt="Cluster Club homepage" />
+            </div>
+            <div class="base"></div>
+          </div>
         </div>
         <div class="proj-content">
           <div class="eye">E-commerce &nbsp;/&nbsp; UI · UX</div>
@@ -501,7 +523,12 @@
 
       <div class="proj r" style="--brand:#EA6C94">
         <div class="proj-media">
-          <img src="project/projects/kids-show/01-hero.png" alt="Stomp Stomp Rhinos kids show website" />
+          <div class="device-laptop">
+            <div class="screen">
+              <img src="project/projects/kids-show/01-hero.png" alt="Stomp Stomp Rhinos kids show website" />
+            </div>
+            <div class="base"></div>
+          </div>
         </div>
         <div class="proj-content">
           <div class="eye">Kids &nbsp;/&nbsp; Brand &amp; Web</div>
