@@ -251,12 +251,17 @@
     aspect-ratio:9/19.5;background:#fff;border-radius:28px}
   .device-phone .screen img{display:block;width:100%;height:100%;
     object-fit:cover;object-position:top}
-  /* interactive prototype stack */
+  /* interactive prototype stack — slide-up transition */
   .device-phone[data-proto]{cursor:pointer}
   .device-phone .proto-img{position:absolute;inset:0;
     width:100%;height:100%;object-fit:cover;object-position:top;
-    opacity:0;transition:opacity .55s cubic-bezier(.2,.7,.2,1)}
-  .device-phone .proto-img.is-active{opacity:1}
+    opacity:0;transform:translateY(28%) scale(.97);
+    transition:opacity .65s cubic-bezier(.2,.7,.2,1),
+               transform .65s cubic-bezier(.2,.7,.2,1)}
+  .device-phone .proto-img.is-active{
+    opacity:1;transform:translateY(0) scale(1);z-index:1}
+  .device-phone .proto-img.is-leaving{
+    opacity:0;transform:translateY(-18%) scale(.98);z-index:2}
   .proto-dots{position:absolute;left:0;right:0;bottom:14px;
     display:flex;justify-content:center;gap:6px;z-index:3}
   .proto-dot{width:5px;height:5px;border-radius:50%;
@@ -771,8 +776,12 @@
     if (!imgs.length) return;
     var i = 0, timer = null, paused = false;
     function show(n){
+      var prev = i;
       i = (n + imgs.length) % imgs.length;
-      imgs.forEach(function(el, k){ el.classList.toggle('is-active', k === i); });
+      imgs.forEach(function(el, k){
+        el.classList.toggle('is-active', k === i);
+        el.classList.toggle('is-leaving', k === prev && k !== i);
+      });
       dots.forEach(function(el, k){ el.classList.toggle('is-active', k === i); });
     }
     function next(){ if (!paused) show(i + 1); }
