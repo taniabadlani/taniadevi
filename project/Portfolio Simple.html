@@ -216,15 +216,9 @@
   .proj{display:grid;grid-template-columns:1fr 1fr;
     gap:clamp(32px,5vw,72px);align-items:center}
   .proj:nth-child(even) .proj-media{order:2}
-  .proj-media{position:relative;border-radius:28px;
-    padding:clamp(22px,3vw,44px);
+  .proj-media{position:relative;
     display:flex;align-items:center;justify-content:center;
-    min-height:360px;overflow:hidden;
-    background:color-mix(in oklab, var(--brand) 9%, transparent)}
-  .proj-media::before{content:"";position:absolute;
-    width:70%;height:70%;left:15%;top:15%;
-    background:radial-gradient(closest-side, var(--brand), transparent 70%);
-    opacity:.22;filter:blur(40px);pointer-events:none}
+    min-height:280px}
   .proj-media > img{position:relative;width:100%;height:auto;
     display:block;border-radius:10px;
     box-shadow:0 24px 50px -20px rgba(0,0,0,.45)}
