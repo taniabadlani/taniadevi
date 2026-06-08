@@ -217,7 +217,6 @@
     gap:clamp(32px,5vw,72px);align-items:center}
   .proj:nth-child(even) .proj-media{order:2}
   .proj-media{position:relative;border-radius:28px;
-    padding:clamp(28px,4vw,56px);
     display:flex;align-items:center;justify-content:center;
     min-height:360px;overflow:hidden;
     background:color-mix(in oklab, var(--brand) 9%, transparent)}
@@ -225,12 +224,8 @@
     width:70%;height:70%;left:15%;top:15%;
     background:radial-gradient(closest-side, var(--brand), transparent 70%);
     opacity:.22;filter:blur(40px);pointer-events:none}
-  .proj-media img{position:relative;max-width:100%;height:auto;
-    border-radius:14px;display:block;
-    box-shadow:0 30px 60px -24px rgba(0,0,0,.45)}
-  .proj-media.phone{align-items:center}
-  .proj-media.phone img{max-width:320px;border-radius:28px;
-    box-shadow:0 24px 50px -18px rgba(0,0,0,.5)}
+  .proj-media img{position:relative;width:100%;height:auto;
+    display:block;object-fit:cover}
   .proj-content{display:flex;flex-direction:column;align-items:flex-start}
   .proj-content .eye{font-family:var(--body);font-weight:500;font-size:12.5px;
     letter-spacing:.06em;text-transform:uppercase;color:var(--mute);
@@ -252,8 +247,7 @@
   @media (max-width:860px){
     .proj{grid-template-columns:1fr;gap:28px}
     .proj:nth-child(even) .proj-media{order:0}
-    .proj-media{min-height:260px;padding:24px}
-    .proj-media.phone img{max-width:240px}
+    .proj-media{min-height:240px}
   }
   .card{position:relative;display:flex;flex-direction:column;text-decoration:none;
     color:var(--c-ink);border-radius:18px;padding:28px 28px 0;overflow:hidden;
@@ -489,7 +483,7 @@
       </div>
 
       <div class="proj r" style="--brand:#4756FF">
-        <div class="proj-media phone">
+        <div class="proj-media">
           <img src="projects/finance-app/cover.png" alt="Finance Banking App screens" />
         </div>
         <div class="proj-content">
