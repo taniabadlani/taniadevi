@@ -384,7 +384,7 @@
     <div class="artifact">
       <h3 class="artifact-title">The IA, mapped out before any pixel-pushing.</h3>
       <div class="artifact-card">
-        <svg viewBox="0 0 900 410" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cluster Club sitemap">
+        <svg viewBox="0 0 900 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cluster Club sitemap">
           <!-- HOME root -->
           <rect class="sm-node" x="395" y="14" width="110" height="32" rx="6"/>
           <text class="sm-node-text" x="450" y="34" text-anchor="middle">HOME</text>
@@ -448,22 +448,58 @@
           <rect class="sm-leaf" x="720" y="270" width="160" height="26" rx="4"/>
           <text class="sm-leaf-text" x="800" y="286" text-anchor="middle">Confirmation</text>
 
-          <!-- Footer divider -->
-          <line class="sm-line" x1="40" y1="326" x2="860" y2="326" stroke-dasharray="3 4"/>
-          <text class="sm-leaf-text" x="40" y="318" text-anchor="start" style="font-size:10px;letter-spacing:.08em;opacity:.55">FOOTER</text>
+          <!-- Footer divider (extra gap above) -->
+          <line class="sm-line" x1="40" y1="366" x2="860" y2="366" stroke-dasharray="3 4"/>
+          <text class="sm-leaf-text" x="40" y="358" text-anchor="start" style="font-size:10px;letter-spacing:.08em;opacity:.55">FOOTER</text>
 
           <!-- Footer policies -->
-          <rect class="sm-leaf" x="40" y="352" width="180" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="130" y="366.5" text-anchor="middle">Shipping Policy</text>
-          <rect class="sm-leaf" x="240" y="352" width="180" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="330" y="366.5" text-anchor="middle">Returns Policy</text>
-          <rect class="sm-leaf" x="440" y="352" width="180" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="530" y="366.5" text-anchor="middle">Privacy Policy</text>
-          <rect class="sm-leaf" x="640" y="352" width="220" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="750" y="366.5" text-anchor="middle">Terms &amp; Conditions</text>
+          <rect class="sm-leaf" x="40" y="392" width="180" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="130" y="406.5" text-anchor="middle">Shipping Policy</text>
+          <rect class="sm-leaf" x="240" y="392" width="180" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="330" y="406.5" text-anchor="middle">Returns Policy</text>
+          <rect class="sm-leaf" x="440" y="392" width="180" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="530" y="406.5" text-anchor="middle">Privacy Policy</text>
+          <rect class="sm-leaf" x="640" y="392" width="220" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="750" y="406.5" text-anchor="middle">Terms &amp; Conditions</text>
         </svg>
       </div>
       <p class="cap"><b>Sitemap</b>Three primary nav buckets at the top (Shop / Our Story / Help) — the pages a shopper actually browses. The purchase flow is shown separately because Cart and Checkout are <em>triggered states</em>, not nav destinations. Footer holds the legal/trust layer.</p>
+    </div>
+
+    <div class="artifact">
+      <h3 class="artifact-title">The buyer's path, end to end.</h3>
+      <div class="artifact-card">
+        <svg viewBox="0 0 900 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cluster Club user flow">
+          <rect class="sm-node" x="20" y="20" width="110" height="40" rx="6"/>
+          <text class="sm-node-text" x="75" y="44" text-anchor="middle">HOME</text>
+
+          <path class="sm-line" d="M130 40 H160 M152 35 L162 40 L152 45"/>
+
+          <rect class="sm-node" x="165" y="20" width="110" height="40" rx="6"/>
+          <text class="sm-node-text" x="220" y="44" text-anchor="middle">SHOP</text>
+
+          <path class="sm-line" d="M275 40 H305 M297 35 L307 40 L297 45"/>
+
+          <rect class="sm-node" x="310" y="20" width="110" height="40" rx="6"/>
+          <text class="sm-node-text" x="365" y="44" text-anchor="middle">PRODUCT</text>
+
+          <path class="sm-line" d="M420 40 H450 M442 35 L452 40 L442 45"/>
+
+          <rect class="sm-node" x="455" y="20" width="110" height="40" rx="6"/>
+          <text class="sm-node-text" x="510" y="44" text-anchor="middle">CART</text>
+
+          <path class="sm-line" d="M565 40 H595 M587 35 L597 40 L587 45"/>
+
+          <rect class="sm-node" x="600" y="20" width="110" height="40" rx="6"/>
+          <text class="sm-node-text" x="655" y="44" text-anchor="middle">CHECKOUT</text>
+
+          <path class="sm-line" d="M710 40 H740 M732 35 L742 40 L732 45"/>
+
+          <rect class="sm-node" x="745" y="20" width="110" height="40" rx="6"/>
+          <text class="sm-node-text" x="800" y="44" text-anchor="middle">DONE</text>
+        </svg>
+      </div>
+      <p class="cap"><b>User Flow</b>Land on Home → browse Shop → pick a flavor → add to Cart → enter Checkout → done. Six steps from intent to ordered. Wireframing started from this spine.</p>
     </div>
   </section>
 </div>
