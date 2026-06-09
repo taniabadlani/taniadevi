@@ -384,67 +384,69 @@
     <div class="artifact">
       <h3 class="artifact-title">The IA, mapped out before any pixel-pushing.</h3>
       <div class="artifact-card">
-        <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cluster Club sitemap">
+        <svg viewBox="0 0 900 410" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cluster Club sitemap">
           <!-- HOME root -->
           <rect class="sm-node" x="395" y="14" width="110" height="32" rx="6"/>
           <text class="sm-node-text" x="450" y="34" text-anchor="middle">HOME</text>
 
-          <!-- Drop + backbone -->
-          <path class="sm-line" d="M450 46 V80 M90 80 H810 M90 80 V104 M270 80 V104 M450 80 V104 M630 80 V104 M810 80 V104"/>
+          <!-- Drop + backbone (3 primary branches now) -->
+          <path class="sm-line" d="M450 46 V80 M180 80 H720 M180 80 V104 M450 80 V104 M720 80 V104"/>
 
-          <!-- L2: 5 primary pages -->
-          <rect class="sm-node" x="35" y="104" width="110" height="32" rx="6"/>
-          <text class="sm-node-text" x="90" y="124" text-anchor="middle">SHOP</text>
+          <!-- L2: 3 primary nav nodes -->
+          <rect class="sm-node" x="115" y="104" width="130" height="32" rx="6"/>
+          <text class="sm-node-text" x="180" y="124" text-anchor="middle">SHOP</text>
 
-          <rect class="sm-node" x="215" y="104" width="110" height="32" rx="6"/>
-          <text class="sm-node-text" x="270" y="124" text-anchor="middle">OUR STORY</text>
+          <rect class="sm-node" x="385" y="104" width="130" height="32" rx="6"/>
+          <text class="sm-node-text" x="450" y="124" text-anchor="middle">OUR STORY</text>
 
-          <rect class="sm-node" x="395" y="104" width="110" height="32" rx="6"/>
-          <text class="sm-node-text" x="450" y="124" text-anchor="middle">FAQ</text>
-
-          <rect class="sm-node" x="575" y="104" width="110" height="32" rx="6"/>
-          <text class="sm-node-text" x="630" y="124" text-anchor="middle">CONTACT</text>
-
-          <rect class="sm-node" x="755" y="104" width="110" height="32" rx="6"/>
-          <text class="sm-node-text" x="810" y="124" text-anchor="middle">CART</text>
+          <rect class="sm-node" x="655" y="104" width="130" height="32" rx="6"/>
+          <text class="sm-node-text" x="720" y="124" text-anchor="middle">HELP</text>
 
           <!-- Drop connectors for sub-pages -->
-          <path class="sm-line" d="M90 136 V156 M270 136 V156 M810 136 V156"/>
+          <path class="sm-line" d="M180 136 V156 M450 136 V156 M720 136 V156"/>
 
-          <!-- Sub-pages under SHOP -->
-          <rect class="sm-leaf" x="30" y="156" width="120" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="90" y="170.5" text-anchor="middle">Milk Choc</text>
-          <rect class="sm-leaf" x="30" y="184" width="120" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="90" y="198.5" text-anchor="middle">White &amp; Cran</text>
-          <rect class="sm-leaf" x="30" y="212" width="120" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="90" y="226.5" text-anchor="middle">Orange Choc</text>
+          <!-- SHOP: flavors -->
+          <rect class="sm-leaf" x="120" y="156" width="120" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="180" y="170.5" text-anchor="middle">Milk Choc</text>
+          <rect class="sm-leaf" x="120" y="184" width="120" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="180" y="198.5" text-anchor="middle">White &amp; Cran</text>
+          <rect class="sm-leaf" x="120" y="212" width="120" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="180" y="226.5" text-anchor="middle">Orange Choc</text>
 
-          <!-- Sub-pages under OUR STORY -->
-          <rect class="sm-leaf" x="205" y="156" width="130" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="270" y="170.5" text-anchor="middle">Brand Story</text>
-          <rect class="sm-leaf" x="205" y="184" width="130" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="270" y="198.5" text-anchor="middle">Our Stores</text>
+          <!-- SHOP: buying flow (small visual gap above) -->
+          <rect class="sm-leaf" x="120" y="248" width="120" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="180" y="262.5" text-anchor="middle">Cart</text>
+          <rect class="sm-leaf" x="120" y="276" width="120" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="180" y="290.5" text-anchor="middle">Checkout</text>
 
-          <!-- CART → CHECKOUT flow -->
-          <rect class="sm-leaf" x="745" y="156" width="130" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="810" y="170.5" text-anchor="middle">Checkout</text>
+          <!-- OUR STORY -->
+          <rect class="sm-leaf" x="390" y="156" width="120" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="450" y="170.5" text-anchor="middle">Brand Story</text>
+          <rect class="sm-leaf" x="390" y="184" width="120" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="450" y="198.5" text-anchor="middle">Our Stores</text>
+
+          <!-- HELP -->
+          <rect class="sm-leaf" x="660" y="156" width="120" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="720" y="170.5" text-anchor="middle">FAQ</text>
+          <rect class="sm-leaf" x="660" y="184" width="120" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="720" y="198.5" text-anchor="middle">Contact</text>
 
           <!-- Footer divider -->
-          <line class="sm-line" x1="40" y1="290" x2="860" y2="290" stroke-dasharray="3 4"/>
-          <text class="sm-leaf-text" x="40" y="282" text-anchor="start" style="font-size:10px;letter-spacing:.08em;opacity:.55">FOOTER</text>
+          <line class="sm-line" x1="40" y1="326" x2="860" y2="326" stroke-dasharray="3 4"/>
+          <text class="sm-leaf-text" x="40" y="318" text-anchor="start" style="font-size:10px;letter-spacing:.08em;opacity:.55">FOOTER</text>
 
           <!-- Footer policies -->
-          <rect class="sm-leaf" x="40" y="316" width="180" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="130" y="330.5" text-anchor="middle">Shipping Policy</text>
-          <rect class="sm-leaf" x="240" y="316" width="180" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="330" y="330.5" text-anchor="middle">Returns Policy</text>
-          <rect class="sm-leaf" x="440" y="316" width="180" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="530" y="330.5" text-anchor="middle">Privacy Policy</text>
-          <rect class="sm-leaf" x="640" y="316" width="220" height="22" rx="4"/>
-          <text class="sm-leaf-text" x="750" y="330.5" text-anchor="middle">Terms &amp; Conditions</text>
+          <rect class="sm-leaf" x="40" y="352" width="180" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="130" y="366.5" text-anchor="middle">Shipping Policy</text>
+          <rect class="sm-leaf" x="240" y="352" width="180" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="330" y="366.5" text-anchor="middle">Returns Policy</text>
+          <rect class="sm-leaf" x="440" y="352" width="180" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="530" y="366.5" text-anchor="middle">Privacy Policy</text>
+          <rect class="sm-leaf" x="640" y="352" width="220" height="22" rx="4"/>
+          <text class="sm-leaf-text" x="750" y="366.5" text-anchor="middle">Terms &amp; Conditions</text>
         </svg>
       </div>
-      <p class="cap"><b>Sitemap</b>Five primary pages, a contained checkout flow, and a footer with the legal/trust layer. Locking the structure up front meant the visual design didn't have to invent navigation.</p>
+      <p class="cap"><b>Sitemap</b>Three primary nav buckets (Shop, Our Story, Help), a contained checkout flow under Shop, and a footer with the legal/trust layer. Locking the structure up front meant the visual design didn't have to invent navigation.</p>
     </div>
   </section>
 </div>
