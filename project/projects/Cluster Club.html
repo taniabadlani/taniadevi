@@ -203,6 +203,40 @@
   .artifact-card .sm-line{stroke:var(--ink);stroke-opacity:.22;
     stroke-width:1;fill:none}
 
+  /* design-system tile */
+  .ds-tile{flex-direction:column;align-items:stretch;
+    justify-content:flex-start;padding:36px clamp(20px,3vw,40px);gap:32px}
+  .ds-row{display:grid;grid-template-columns:110px 1fr;gap:28px;align-items:start}
+  .ds-label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--mute);padding-top:6px}
+  .ds-swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+  .ds-swatch{aspect-ratio:1;border-radius:8px;padding:12px;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:#fff;
+    border:1px solid color-mix(in oklab,var(--ink) 8%,transparent)}
+  .ds-swatch b{font-weight:500;display:block}
+  .ds-swatch span{opacity:.75;display:block;margin-top:2px}
+  .ds-types{display:grid;gap:18px}
+  .ds-type-row{display:flex;flex-direction:column;gap:4px}
+  .ds-type-sample{font-family:var(--display);color:var(--ink);
+    letter-spacing:-.015em;line-height:1.15}
+  .ds-type-meta{font-family:var(--mono);font-size:10px;letter-spacing:.04em;
+    color:var(--mute)}
+  .ds-comps{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .ds-btn{font-family:var(--body);font-size:14px;font-weight:500;
+    padding:11px 22px;border-radius:999px;border:0;cursor:default;
+    background:#7B3F1A;color:#FDF4B6;letter-spacing:-.005em}
+  .ds-badge{font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+    text-transform:uppercase;padding:6px 12px;border-radius:999px;
+    background:#E84285;color:#fff;font-weight:500}
+  .ds-price{font-family:var(--display);font-size:18px;font-weight:500;
+    padding:8px 14px;border-radius:8px;background:#FDF4B6;color:#2A1F12;
+    border:1px solid rgba(42,31,18,.15);letter-spacing:-.01em}
+  @media (max-width:680px){
+    .ds-row{grid-template-columns:1fr;gap:14px}
+    .ds-swatches{grid-template-columns:repeat(3,1fr)}
+  }
+
   /* result outcome card */
   .result{margin:32px 0 0;padding:36px 36px;background:var(--accent-2);
     color:#3a2a14;border-radius:18px;
@@ -500,6 +534,51 @@
         </svg>
       </div>
       <p class="cap"><b>User Flow</b>Land on Home → browse Shop → pick a flavor → add to Cart → enter Checkout → done. Six steps from intent to ordered. Wireframing started from this spine.</p>
+    </div>
+
+    <div class="artifact">
+      <h3 class="artifact-title">Style system, distilled.</h3>
+      <div class="artifact-card ds-tile">
+        <div class="ds-row">
+          <div class="ds-label">Palette</div>
+          <div class="ds-swatches">
+            <div class="ds-swatch" style="background:#7B3F1A"><b>Brand</b><span>#7B3F1A</span></div>
+            <div class="ds-swatch" style="background:#FDF4B6;color:#2A1F12"><b>Cream</b><span>#FDF4B6</span></div>
+            <div class="ds-swatch" style="background:#E84285"><b>Cranberry</b><span>#E84285</span></div>
+            <div class="ds-swatch" style="background:#E5651E"><b>Orange</b><span>#E5651E</span></div>
+            <div class="ds-swatch" style="background:#2A1F12"><b>Ink</b><span>#2A1F12</span></div>
+            <div class="ds-swatch" style="background:#FFFFFF;color:#2A1F12"><b>Surface</b><span>#FFFFFF</span></div>
+          </div>
+        </div>
+
+        <div class="ds-row">
+          <div class="ds-label">Type</div>
+          <div class="ds-types">
+            <div class="ds-type-row">
+              <div class="ds-type-sample" style="font-size:34px;font-weight:600">A tantalising popcorn experience</div>
+              <div class="ds-type-meta">Display · 34/40 · 600</div>
+            </div>
+            <div class="ds-type-row">
+              <div class="ds-type-sample" style="font-size:18px;font-weight:500">Belgian Milk Chocolate</div>
+              <div class="ds-type-meta">Section · 18/24 · 500</div>
+            </div>
+            <div class="ds-type-row">
+              <div class="ds-type-sample" style="font-size:14px;font-weight:400;font-family:var(--body);color:var(--mute);line-height:1.5">Air-popped popcorn coated in Belgian chocolate, walnuts and brazil nuts.</div>
+              <div class="ds-type-meta">Body · 14/22 · 400</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-row">
+          <div class="ds-label">Components</div>
+          <div class="ds-comps">
+            <button class="ds-btn" type="button">Shop Now</button>
+            <span class="ds-badge">Best Seller</span>
+            <span class="ds-price">£4.99</span>
+          </div>
+        </div>
+      </div>
+      <p class="cap"><b>Style system</b>One palette, three type sizes, and a handful of components that the whole site composed from. Locking these early kept every page consistent without slowing the build.</p>
     </div>
   </section>
 </div>
