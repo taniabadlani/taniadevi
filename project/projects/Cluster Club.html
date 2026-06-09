@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&family=Fredoka+One&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
 
 <style>
   :root{
@@ -219,13 +219,15 @@
   .ds-swatch span{opacity:.75;display:block;margin-top:2px}
   .ds-types{display:grid;gap:18px}
   .ds-type-row{display:flex;flex-direction:column;gap:4px}
-  .ds-type-sample{font-family:var(--display);color:var(--ink);
-    letter-spacing:-.015em;line-height:1.15}
+  .ds-type-sample{font-family:'Fredoka One',var(--display);color:var(--ink);
+    letter-spacing:-.005em;line-height:1.15}
+  .ds-type-sample.body{font-family:'Poppins',var(--body);font-weight:400;
+    color:var(--mute);line-height:1.55;letter-spacing:0}
   .ds-type-meta{font-family:var(--mono);font-size:10px;letter-spacing:.04em;
     color:var(--mute)}
   .ds-comps{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-  .ds-btn{font-family:var(--body);font-size:14px;font-weight:500;
-    padding:11px 22px;border-radius:999px;border:0;cursor:default;
+  .ds-btn{font-family:'Poppins',var(--body);font-size:14px;font-weight:500;
+    padding:11px 24px;border-radius:999px;border:0;cursor:default;
     background:#9D4219;color:#FFFFE3;letter-spacing:-.005em}
   .ds-badge{font-family:var(--mono);font-size:10px;letter-spacing:.08em;
     text-transform:uppercase;padding:6px 12px;border-radius:999px;
@@ -556,16 +558,16 @@
           <div class="ds-label">Type</div>
           <div class="ds-types">
             <div class="ds-type-row">
-              <div class="ds-type-sample" style="font-size:34px;font-weight:600">A tantalising popcorn experience</div>
-              <div class="ds-type-meta">Display · 34/40 · 600</div>
+              <div class="ds-type-sample" style="font-size:34px">A tantalising popcorn experience</div>
+              <div class="ds-type-meta">Fredoka One · Display · 34/40</div>
             </div>
             <div class="ds-type-row">
-              <div class="ds-type-sample" style="font-size:18px;font-weight:500">Belgian Milk Chocolate</div>
-              <div class="ds-type-meta">Section · 18/24 · 500</div>
+              <div class="ds-type-sample" style="font-size:20px">Belgian Milk Chocolate</div>
+              <div class="ds-type-meta">Fredoka One · Section · 20/26</div>
             </div>
             <div class="ds-type-row">
-              <div class="ds-type-sample" style="font-size:14px;font-weight:400;font-family:var(--body);color:var(--mute);line-height:1.5">Air-popped popcorn coated in Belgian chocolate, walnuts and brazil nuts.</div>
-              <div class="ds-type-meta">Body · 14/22 · 400</div>
+              <div class="ds-type-sample body" style="font-size:14px">Air-popped popcorn coated in Belgian chocolate, walnuts and brazil nuts.</div>
+              <div class="ds-type-meta">Poppins · Body · 14/22 · 400</div>
             </div>
           </div>
         </div>
