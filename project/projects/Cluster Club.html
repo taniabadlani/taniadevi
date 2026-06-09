@@ -209,7 +209,8 @@
   .ds-row{display:grid;grid-template-columns:110px 1fr;gap:28px;align-items:start}
   .ds-label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
     text-transform:uppercase;color:var(--mute);padding-top:6px}
-  .ds-swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+  .ds-swatches{display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px}
   .ds-swatch{aspect-ratio:1;border-radius:8px;padding:12px;
     display:flex;flex-direction:column;justify-content:flex-end;
     font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:#fff;
@@ -225,16 +226,15 @@
   .ds-comps{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
   .ds-btn{font-family:var(--body);font-size:14px;font-weight:500;
     padding:11px 22px;border-radius:999px;border:0;cursor:default;
-    background:#7B3F1A;color:#FDF4B6;letter-spacing:-.005em}
+    background:#9D4219;color:#FFFFE3;letter-spacing:-.005em}
   .ds-badge{font-family:var(--mono);font-size:10px;letter-spacing:.08em;
     text-transform:uppercase;padding:6px 12px;border-radius:999px;
-    background:#E84285;color:#fff;font-weight:500}
+    background:#D6204E;color:#fff;font-weight:500}
   .ds-price{font-family:var(--display);font-size:18px;font-weight:500;
-    padding:8px 14px;border-radius:8px;background:#FDF4B6;color:#2A1F12;
-    border:1px solid rgba(42,31,18,.15);letter-spacing:-.01em}
+    padding:8px 14px;border-radius:8px;background:#FFFFE3;color:#3A2111;
+    border:1px solid rgba(58,33,17,.15);letter-spacing:-.01em}
   @media (max-width:680px){
     .ds-row{grid-template-columns:1fr;gap:14px}
-    .ds-swatches{grid-template-columns:repeat(3,1fr)}
   }
 
   /* result outcome card */
@@ -542,12 +542,13 @@
         <div class="ds-row">
           <div class="ds-label">Palette</div>
           <div class="ds-swatches">
-            <div class="ds-swatch" style="background:#7B3F1A"><b>Brand</b><span>#7B3F1A</span></div>
-            <div class="ds-swatch" style="background:#FDF4B6;color:#2A1F12"><b>Cream</b><span>#FDF4B6</span></div>
-            <div class="ds-swatch" style="background:#E84285"><b>Cranberry</b><span>#E84285</span></div>
-            <div class="ds-swatch" style="background:#E5651E"><b>Orange</b><span>#E5651E</span></div>
-            <div class="ds-swatch" style="background:#2A1F12"><b>Ink</b><span>#2A1F12</span></div>
-            <div class="ds-swatch" style="background:#FFFFFF;color:#2A1F12"><b>Surface</b><span>#FFFFFF</span></div>
+            <div class="ds-swatch" style="background:#3A2111"><b>Ink</b><span>#3A2111</span></div>
+            <div class="ds-swatch" style="background:#9D4219"><b>Brand</b><span>#9D4219</span></div>
+            <div class="ds-swatch" style="background:#FFFFE3;color:#3A2111"><b>Cream</b><span>#FFFFE3</span></div>
+            <div class="ds-swatch" style="background:#FFFFFF;color:#3A2111"><b>Surface</b><span>#FFFFFF</span></div>
+            <div class="ds-swatch" style="background:#FFC43A;color:#3A2111"><b>Yellow</b><span>#FFC43A</span></div>
+            <div class="ds-swatch" style="background:#D6204E"><b>Berry</b><span>#D6204E</span></div>
+            <div class="ds-swatch" style="background:#EE5325"><b>Orange</b><span>#EE5325</span></div>
           </div>
         </div>
 
