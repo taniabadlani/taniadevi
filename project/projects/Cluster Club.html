@@ -235,6 +235,32 @@
   .ds-price{font-family:var(--display);font-size:18px;font-weight:500;
     padding:8px 14px;border-radius:8px;background:#FFFFE3;color:#3A2111;
     border:1px solid rgba(58,33,17,.15);letter-spacing:-.01em}
+
+  /* tall wireframe artifact (scrollable to save vertical space) */
+  .wf-frame{position:relative;width:100%;max-width:760px;margin:0 auto;
+    background:#fff;border:.5px solid var(--line);border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 14px 40px -22px rgba(0,0,0,.5)}
+  .wf-chrome{height:30px;display:flex;align-items:center;gap:6px;
+    padding:0 14px;background:#F2EFEA;
+    border-bottom:1px solid rgba(0,0,0,.06)}
+  html[data-theme="dark"] .wf-chrome{background:rgba(255,255,255,.06);
+    border-bottom:1px solid rgba(255,255,255,.06)}
+  .wf-chrome i{width:9px;height:9px;border-radius:50%;display:block}
+  .wf-chrome .d1{background:#FF5F57}
+  .wf-chrome .d2{background:#FEBC2E}
+  .wf-chrome .d3{background:#28C840}
+  .wf-chrome .url{margin-left:12px;font-family:var(--mono);font-size:10.5px;
+    color:rgba(0,0,0,.5);letter-spacing:.02em}
+  html[data-theme="dark"] .wf-chrome .url{color:rgba(255,255,255,.4)}
+  .wf-scroll{height:560px;overflow-y:auto;background:#fff;
+    scroll-behavior:smooth}
+  .wf-scroll::-webkit-scrollbar{width:6px}
+  .wf-scroll::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:3px}
+  .wf-scroll img{display:block;width:100%;height:auto}
+  .wf-hint{font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--mute);text-align:center;
+    margin-top:8px;opacity:.8}
   @media (max-width:680px){
     .ds-row{grid-template-columns:1fr;gap:14px}
   }
@@ -536,6 +562,21 @@
         </svg>
       </div>
       <p class="cap"><b>User Flow</b>Land on Home → browse Shop → pick a flavor → add to Cart → enter Checkout → done. Six steps from intent to ordered. Wireframing started from this spine.</p>
+    </div>
+
+    <div class="artifact">
+      <h3 class="artifact-title">Low-fi wires before any pixel-pushing.</h3>
+      <div class="wf-frame">
+        <div class="wf-chrome">
+          <i class="d1"></i><i class="d2"></i><i class="d3"></i>
+          <span class="url">clusterclub.com / wireframe</span>
+        </div>
+        <div class="wf-scroll">
+          <img src="cluster-club/wireframe.png" alt="Cluster Club landing page low-fidelity wireframe" />
+        </div>
+      </div>
+      <p class="wf-hint">↑ scroll inside the frame to see the full wireframe ↓</p>
+      <p class="cap"><b>Low-fi wireframe</b>Hero with three product placeholders, alternating product sections, About + chat cue, FAQ accordion, multi-column footer. Layout decisions locked in gray boxes before color, type, or imagery joined the conversation.</p>
     </div>
 
     <div class="artifact">
