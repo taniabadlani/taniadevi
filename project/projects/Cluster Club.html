@@ -182,10 +182,8 @@
     box-shadow:0 18px 36px -16px rgba(0,0,0,.5)}
   .cta svg{width:14px;height:14px}
 
-  /* process artifact (sitemap, wireframes, etc.) - breaks out of narrow col */
-  .artifact{margin:40px 0 0;
-    position:relative;left:50%;transform:translateX(-50%);
-    width:min(1240px,calc(100vw - 56px))}
+  /* process artifact (sitemap, wireframes, etc.) */
+  .artifact{margin:40px 0 0}
   .artifact-title{font-family:var(--display);font-weight:500;font-size:22px;
     letter-spacing:-.01em;margin:0 0 16px;color:var(--ink);max-width:60ch}
   .artifact .cap{max-width:62ch}
@@ -194,7 +192,7 @@
     border:.5px solid var(--line);border-radius:14px;
     overflow-x:auto;
     display:flex;align-items:center;justify-content:center}
-  .artifact-card svg{width:100%;height:auto;max-width:1100px;
+  .artifact-card svg{width:100%;height:auto;max-width:1080px;
     min-width:560px;display:block;flex-shrink:0}
   .artifact-card .sm-node{fill:var(--accent)}
   .artifact-card .sm-node-text{fill:var(--accent-ink);font-family:var(--mono);
@@ -445,9 +443,12 @@
         <p>The full site in Figma - clean layout, strong product imagery, clear calls to action. Every decision was checked against one question: <em>does this make it easier to buy?</em></p>
       </div>
     </div>
+  </section>
+</div>
 
-    <div class="artifact">
-      <h3 class="artifact-title">The IA, mapped out before any pixel-pushing.</h3>
+<div class="col wide">
+  <div class="artifact" style="margin-top:0">
+    <h3 class="artifact-title">The IA, mapped out before any pixel-pushing.</h3>
       <div class="artifact-card">
         <svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cluster Club sitemap">
           <!-- HOME root -->
@@ -529,10 +530,12 @@
         </svg>
       </div>
       <p class="cap"><b>Sitemap</b>Three primary nav buckets at the top (Shop / Our Story / Help) - the pages a shopper actually browses. The purchase flow is shown separately because Cart and Checkout are <em>triggered states</em>, not nav destinations. Footer holds the legal/trust layer.</p>
-    </div>
+  </div>
+</div>
 
-    <div class="artifact">
-      <h3 class="artifact-title">The buyer's path, end to end.</h3>
+<div class="col wide">
+  <div class="artifact">
+    <h3 class="artifact-title">The buyer's path, end to end.</h3>
       <div class="artifact-card">
         <svg viewBox="0 0 900 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cluster Club user flow">
           <rect class="sm-node" x="20" y="20" width="110" height="40" rx="6"/>
@@ -565,10 +568,12 @@
         </svg>
       </div>
       <p class="cap"><b>User Flow</b>Land on Home → browse Shop → pick a flavor → add to Cart → enter Checkout → done. Six steps from intent to ordered. Wireframing started from this spine.</p>
-    </div>
+  </div>
+</div>
 
-    <div class="artifact">
-      <h3 class="artifact-title">Mid-fi wires before any pixel-pushing.</h3>
+<div class="col wide">
+  <div class="artifact">
+    <h3 class="artifact-title">Mid-fi wires before any pixel-pushing.</h3>
       <div class="wf-frame">
         <div class="wf-chrome">
           <i class="d1"></i><i class="d2"></i><i class="d3"></i>
@@ -580,10 +585,12 @@
       </div>
       <p class="wf-hint">↑ scroll inside the frame to see the full wireframe ↓</p>
       <p class="cap"><b>Mid-fi wireframe</b>Hero with three angled product placeholders, alternating product sections, About + chat cue, FAQ accordion, multi-column footer. Layout and visual arrangement decisions both locked in gray before color, type, or imagery joined the conversation.</p>
-    </div>
+  </div>
+</div>
 
-    <div class="artifact">
-      <h3 class="artifact-title">Style system, distilled.</h3>
+<div class="col wide">
+  <div class="artifact">
+    <h3 class="artifact-title">Style system, distilled.</h3>
       <div class="artifact-card ds-tile">
         <div class="ds-row">
           <div class="ds-label">Palette</div>
@@ -626,8 +633,7 @@
         </div>
       </div>
       <p class="cap"><b>Style system</b>One palette, three type sizes, and a handful of components that the whole site composed from. Locking these early kept every page consistent without slowing the build.</p>
-    </div>
-  </section>
+  </div>
 </div>
 
 <!-- ── Pull quote ──────────────────────────────────────────────────────── -->
