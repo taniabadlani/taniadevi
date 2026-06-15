@@ -503,8 +503,8 @@
   }
   try {
     var saved = localStorage.getItem(KEY);
-    if (saved) setTheme(saved); else setTheme('dark');
-  } catch(e) { setTheme('dark'); }
+    if (saved) setTheme(saved); else setTheme('light');
+  } catch(e) { setTheme('light'); }
   btn.addEventListener('click', function(){
     setTheme(html.dataset.theme === 'dark' ? 'light' : 'dark');
   });

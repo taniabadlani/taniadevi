@@ -507,28 +507,6 @@
 
     <div class="proj-list">
 
-      <div class="proj r" style="--brand:#7B3F1A">
-        <div class="proj-media">
-          <div class="device-laptop">
-            <div class="screen">
-              <img src="project/projects/cluster-club/01-home.png" alt="Cluster Club homepage" />
-            </div>
-            <div class="base"></div>
-          </div>
-        </div>
-        <div class="proj-content">
-          <div class="eye">E-commerce &nbsp;/&nbsp; UI · UX</div>
-          <h3>Cluster Club</h3>
-          <p>Built and launched a snack brand's first shoppable e-commerce site in 8 weeks - from zero digital presence to a fully live storefront.</p>
-          <a class="proj-cta" href="project/projects/Cluster Club.html">
-            Read Case Study
-            <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-
       <div class="proj r" style="--brand:#4756FF">
         <div class="proj-media">
           <div class="device-phone" data-proto>
@@ -549,6 +527,28 @@
           <h3>Finance Banking App</h3>
           <p>A 3-week mobile banking concept - designed end-to-end with clear hierarchy, generous space, and one job per screen.</p>
           <a class="proj-cta" href="project/projects/Finance Banking App.html">
+            Read Case Study
+            <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="proj r" style="--brand:#7B3F1A">
+        <div class="proj-media">
+          <div class="device-laptop">
+            <div class="screen">
+              <img src="project/projects/cluster-club/01-home.png" alt="Cluster Club homepage" />
+            </div>
+            <div class="base"></div>
+          </div>
+        </div>
+        <div class="proj-content">
+          <div class="eye">E-commerce &nbsp;/&nbsp; UI · UX</div>
+          <h3>Cluster Club</h3>
+          <p>Built and launched a snack brand's first shoppable e-commerce site in 8 weeks - from zero digital presence to a fully live storefront.</p>
+          <a class="proj-cta" href="project/projects/Cluster Club.html">
             Read Case Study
             <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -658,8 +658,8 @@
   }
   try {
     var saved = localStorage.getItem(KEY);
-    setTheme(saved || 'dark');
-  } catch(e) { setTheme('dark'); }
+    setTheme(saved || 'light');
+  } catch(e) { setTheme('light'); }
 
   if (btn) btn.addEventListener('click', function(){
     setTheme(html.dataset.theme === 'dark' ? 'light' : 'dark');
