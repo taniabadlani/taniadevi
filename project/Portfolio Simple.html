@@ -168,18 +168,41 @@
     top:6.2px;transform:rotate(-45deg)}
   @media (max-width:640px){
     .nav-bar{display:none}
-    .nav-toggle{display:inline-flex}
-    .head-center{justify-content:flex-end;order:initial;flex-basis:auto;
-      position:relative}
+    .nav-toggle{display:inline-flex;position:relative;z-index:60}
+    .head-center{justify-content:flex-end;order:initial;flex-basis:auto}
     .nav-bar.is-open{
-      display:flex;flex-direction:column;align-items:stretch;
-      position:absolute;top:calc(100% + 10px);right:0;
-      width:200px;padding:8px;
-      border-radius:18px;z-index:30;gap:4px}
-    .nav-bar.is-open a{height:42px;padding:0 18px;
-      justify-content:center;border-radius:999px;
-      font-size:12px;letter-spacing:.1em;text-transform:uppercase;
-      font-weight:500}
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      position:fixed;inset:0;
+      padding:80px 32px;margin:0;
+      background:var(--bg);
+      border:0;border-radius:0;
+      box-shadow:none;
+      backdrop-filter:none;-webkit-backdrop-filter:none;
+      z-index:50;gap:18px;
+      animation:overlay-in .4s cubic-bezier(.2,.7,.2,1) both}
+    .nav-bar.is-open a{
+      height:auto;padding:6px 18px;
+      font-family:var(--display);font-weight:500;
+      font-size:clamp(40px,13vw,72px);
+      letter-spacing:-.025em;text-transform:none;
+      color:var(--ink);
+      border-radius:0;background:transparent;
+      opacity:0;transform:translateY(14px);
+      animation:overlay-item .55s cubic-bezier(.2,.7,.2,1) both}
+    .nav-bar.is-open a:nth-child(1){animation-delay:.1s}
+    .nav-bar.is-open a:nth-child(2){animation-delay:.18s}
+    .nav-bar.is-open a:nth-child(3){animation-delay:.26s}
+    .nav-bar.is-open a:hover,.nav-bar.is-open a.active{
+      background:transparent;color:var(--ink);opacity:.55}
+  }
+  @keyframes overlay-in{
+    from{opacity:0}
+    to{opacity:1}
+  }
+  @keyframes overlay-item{
+    from{opacity:0;transform:translateY(14px)}
+    to{opacity:1;transform:none}
   }
 
   /* ── floating theme toggle */
@@ -521,7 +544,7 @@
       </button>
       <nav class="nav-bar" id="primaryNav" aria-label="Primary">
         <a href="#work">Work</a>
-        <a href="#about">Info</a>
+        <a href="#about">About me</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -784,6 +807,7 @@
     var setOpen = function(open){
       navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       nav.classList.toggle('is-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
     };
     navToggle.addEventListener('click', function(){
       setOpen(navToggle.getAttribute('aria-expanded') !== 'true');
