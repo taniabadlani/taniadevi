@@ -136,6 +136,50 @@
     .nav-bar a{padding:0 16px;font-size:12px;letter-spacing:.06em;height:34px}
   }
 
+  /* ── hamburger toggle (mobile only) */
+  .nav-toggle{display:none;appearance:none;border:0;cursor:pointer;
+    width:44px;height:44px;border-radius:999px;padding:0;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(24px) saturate(160%);
+    -webkit-backdrop-filter:blur(24px) saturate(160%);
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 1px 0 rgba(255,255,255,.10) inset,
+               0 14px 30px -14px rgba(0,0,0,.55);
+    align-items:center;justify-content:center;color:var(--ink);
+    transition:background .2s}
+  html[data-theme="light"] .nav-toggle{
+    background:rgba(255,255,255,.65);
+    border:1px solid rgba(0,0,0,.10);
+    box-shadow:0 1px 0 rgba(255,255,255,.7) inset,
+               0 12px 26px -12px rgba(0,0,0,.18)}
+  .nav-toggle .bars{position:relative;width:18px;height:14px;display:block}
+  .nav-toggle .bars span{position:absolute;left:0;right:0;height:1.6px;
+    background:currentColor;border-radius:2px;
+    transition:transform .3s cubic-bezier(.2,.7,.2,1),
+               top .3s cubic-bezier(.2,.7,.2,1),
+               opacity .2s}
+  .nav-toggle .bars span:nth-child(1){top:0}
+  .nav-toggle .bars span:nth-child(2){top:6.2px}
+  .nav-toggle .bars span:nth-child(3){top:12.4px}
+  .nav-toggle[aria-expanded="true"] .bars span:nth-child(1){
+    top:6.2px;transform:rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] .bars span:nth-child(2){opacity:0}
+  .nav-toggle[aria-expanded="true"] .bars span:nth-child(3){
+    top:6.2px;transform:rotate(-45deg)}
+  @media (max-width:640px){
+    .nav-bar{display:none}
+    .nav-toggle{display:inline-flex}
+    .head-center{justify-content:flex-end;order:initial;flex-basis:auto}
+    .nav-bar.is-open{
+      display:flex;flex-direction:column;align-items:stretch;
+      position:absolute;top:calc(100% + 12px);right:0;left:0;
+      margin:0 clamp(20px,4vw,56px);padding:10px;
+      border-radius:18px;z-index:30;gap:4px}
+    .nav-bar.is-open a{height:44px;padding:0 18px;
+      justify-content:flex-start;border-radius:12px;
+      font-size:13px;letter-spacing:.08em}
+  }
+
   /* ── floating theme toggle */
   .theme-side{position:fixed;bottom:22px;right:22px;z-index:40;
     appearance:none;height:36px;padding:0 14px;border-radius:999px;
@@ -469,7 +513,11 @@
     </div>
 
     <div class="head-center">
-      <nav class="nav-bar" aria-label="Primary">
+      <button class="nav-toggle" id="navToggle" type="button"
+              aria-expanded="false" aria-controls="primaryNav" aria-label="Menu">
+        <span class="bars"><span></span><span></span><span></span></span>
+      </button>
+      <nav class="nav-bar" id="primaryNav" aria-label="Primary">
         <a href="#work">Work</a>
         <a href="#about">Info</a>
         <a href="#contact">Contact</a>
@@ -727,6 +775,26 @@
       if (nav)  nav.classList.add('in');
     }, 80);
   });
+
+  // hamburger toggle (mobile)
+  var navToggle = document.getElementById('navToggle');
+  if (navToggle && nav) {
+    var setOpen = function(open){
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      nav.classList.toggle('is-open', open);
+    };
+    navToggle.addEventListener('click', function(){
+      setOpen(navToggle.getAttribute('aria-expanded') !== 'true');
+    });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ setOpen(false); });
+    });
+    document.addEventListener('click', function(e){
+      if (navToggle.getAttribute('aria-expanded') !== 'true') return;
+      if (nav.contains(e.target) || navToggle.contains(e.target)) return;
+      setOpen(false);
+    });
+  }
 
   // hero word-by-word reveal
   var h1 = document.querySelector('.hero h1');
