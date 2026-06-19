@@ -169,15 +169,16 @@
   @media (max-width:640px){
     .nav-bar{display:none}
     .nav-toggle{display:inline-flex}
-    .head-center{justify-content:flex-end;order:initial;flex-basis:auto}
+    .head-center{justify-content:flex-end;order:initial;flex-basis:auto;
+      position:relative}
     .nav-bar.is-open{
       display:flex;flex-direction:column;align-items:stretch;
-      position:absolute;top:calc(100% + 12px);right:0;left:0;
-      margin:0 clamp(20px,4vw,56px);padding:10px;
+      position:absolute;top:calc(100% + 10px);right:0;
+      width:200px;padding:8px;
       border-radius:18px;z-index:30;gap:4px}
-    .nav-bar.is-open a{height:44px;padding:0 22px;
+    .nav-bar.is-open a{height:42px;padding:0 18px;
       justify-content:center;border-radius:999px;
-      font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+      font-size:12px;letter-spacing:.1em;text-transform:uppercase;
       font-weight:500}
   }
 
