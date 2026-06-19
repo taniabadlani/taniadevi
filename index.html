@@ -170,7 +170,9 @@
     .nav-bar{display:none}
     .nav-toggle{display:inline-flex;position:relative;z-index:60}
     .head-center{justify-content:flex-end;order:initial;flex-basis:auto}
-    .nav-bar.is-open{
+    html .nav-bar.is-open,
+    html[data-theme="light"] .nav-bar.is-open,
+    html[data-theme="dark"] .nav-bar.is-open{
       display:flex;flex-direction:column;
       align-items:flex-start;justify-content:flex-start;
       position:fixed;inset:0;
