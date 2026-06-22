@@ -194,7 +194,8 @@
       animation:overlay-item .55s cubic-bezier(.2,.7,.2,1) both}
     .nav-bar.is-open a:nth-child(1){animation-delay:.08s}
     .nav-bar.is-open a:nth-child(2){animation-delay:.16s}
-    .nav-bar.is-open a:nth-child(3){
+    .nav-bar.is-open a:nth-child(3){animation-delay:.24s}
+    .nav-bar.is-open a:nth-child(4){
       position:absolute;
       bottom:clamp(20px,5vw,32px);right:clamp(20px,4vw,32px);
       padding:14px 28px;
@@ -205,9 +206,9 @@
       letter-spacing:.04em;text-transform:uppercase;
       transition:transform .25s cubic-bezier(.2,.7,.2,1),
                  box-shadow .25s cubic-bezier(.2,.7,.2,1);
-      animation-delay:.24s}
-    .nav-bar.is-open a:nth-child(3):hover,
-    .nav-bar.is-open a:nth-child(3):active{
+      animation-delay:.32s}
+    .nav-bar.is-open a:nth-child(4):hover,
+    .nav-bar.is-open a:nth-child(4):active{
       background:var(--bg);color:var(--ink);opacity:1;
       transform:translateY(-2px);
       box-shadow:0 12px 28px -12px rgba(0,0,0,.45)}
@@ -564,6 +565,7 @@
       <nav class="nav-bar" id="primaryNav" aria-label="Primary">
         <a href="#work">Work</a>
         <a href="#about">About me</a>
+        <a href="Tania_Devi_Resume.pdf" target="_blank" rel="noopener">Resume</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
