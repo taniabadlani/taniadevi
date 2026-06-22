@@ -183,13 +183,17 @@
       backdrop-filter:none;-webkit-backdrop-filter:none;
       z-index:50;gap:24px;
       animation:overlay-in .4s cubic-bezier(.2,.7,.2,1) both}
-    .nav-bar.is-open a{
+    .nav-bar.is-open a,
+    .nav-bar.is-open a:link,
+    .nav-bar.is-open a:visited{
       height:auto;padding:0;
       font-family:var(--display);font-weight:500;
       font-size:clamp(32px,9vw,48px);
       letter-spacing:-.02em;text-transform:none;
+      text-decoration:none;
       color:var(--bg);
-      border-radius:0;background:transparent;
+      border:0;border-radius:0;background:transparent;
+      box-shadow:none;
       opacity:0;transform:translateY(14px);
       animation:overlay-item .55s cubic-bezier(.2,.7,.2,1) both}
     .nav-bar.is-open a:nth-child(1){animation-delay:.08s}
