@@ -215,8 +215,14 @@
       background:var(--bg);color:var(--ink);opacity:1;
       transform:translateY(-2px);
       box-shadow:0 12px 28px -12px rgba(0,0,0,.45)}
-    .nav-bar.is-open a:hover,.nav-bar.is-open a.active{
-      background:transparent;color:var(--bg);opacity:.6}
+    .nav-bar.is-open a:hover,
+    .nav-bar.is-open a:active,
+    .nav-bar.is-open a:focus,
+    .nav-bar.is-open a.active{
+      background:transparent;color:var(--bg);opacity:1;
+      text-decoration:underline;
+      text-underline-offset:8px;
+      text-decoration-thickness:2px}
     .nav-toggle[aria-expanded="true"]{color:var(--bg)}
   }
   @keyframes overlay-in{
