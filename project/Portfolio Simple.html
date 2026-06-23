@@ -93,7 +93,18 @@
   .head-id .rl{font-family:var(--body);font-size:14px;color:var(--mute);
     margin-top:2px}
   .head-center{display:flex;justify-content:center;flex:1}
-  .head-right{display:flex;justify-content:flex-end}
+  .head-right{display:flex;justify-content:flex-end;align-items:center}
+  .head-cta{display:inline-flex;align-items:center;height:40px;
+    padding:0 22px;border-radius:999px;
+    background:var(--ink);color:var(--bg);
+    font-family:var(--body);font-size:13px;font-weight:500;
+    letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+    transition:transform .25s cubic-bezier(.2,.7,.2,1),
+               box-shadow .25s cubic-bezier(.2,.7,.2,1)}
+  .head-cta:hover{transform:translateY(-2px);
+    box-shadow:0 14px 28px -12px rgba(0,0,0,.35)}
+  /* Hide Contact from the pill nav (it lives in head-right CTA on desktop) */
+  .nav-bar a[href="#contact"]{display:none}
   @media (max-width:900px){
     .head{flex-wrap:wrap}
     .head-center{order:3;flex-basis:100%}
@@ -170,6 +181,8 @@
     .nav-bar{display:none}
     .nav-toggle{display:inline-flex;position:relative;z-index:60}
     .head-center{justify-content:flex-end;order:initial;flex-basis:auto}
+    .head-cta{display:none}
+    .nav-bar.is-open a[href="#contact"]{display:inline-flex}
     html .nav-bar.is-open,
     html[data-theme="light"] .nav-bar.is-open,
     html[data-theme="dark"] .nav-bar.is-open{
@@ -587,6 +600,7 @@
     </div>
 
     <div class="head-right">
+      <a class="head-cta" href="#contact">Contact</a>
     </div>
   </div>
 </header>
